@@ -17,6 +17,7 @@ public final class ProjectInputLoader {
         List<String> gameMap = new ArrayList<>();
         List<List<String>> playersData = new ArrayList<>();
         List<String> playersMoves = new ArrayList<>();
+        List<List<String>> angelsData = new ArrayList<>();
         int noRows = 0;
         int noCols = 0;
         int noPlayers = 0;
@@ -46,11 +47,21 @@ public final class ProjectInputLoader {
                 playersMoves.add(fs.nextWord());
             }
 
+            for (int i = 0; i < noMoves; ++i) {
+                int noAngels = fs.nextInt();
+                List<String> tempAngelData = new ArrayList<>();
+
+                for (int j = 0; j < noAngels; ++j) {
+                    tempAngelData.add(fs.nextWord());
+                }
+                angelsData.add(tempAngelData);
+            }
+
             fs.close();
         } catch (Exception e1) {
             e1.printStackTrace();
         }
 
-        return new ProjectInput(gameMap, playersData, playersMoves, noRows, noCols);
+        return new ProjectInput(gameMap, playersData, playersMoves, noRows, noCols, angelsData);
     }
 }

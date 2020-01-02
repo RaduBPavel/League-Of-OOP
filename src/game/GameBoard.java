@@ -1,7 +1,9 @@
 package game;
 
+import angels.AngelFactory;
 import players.BasePlayer;
 import players.PlayerFactory;
+import angels.BaseAngel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +12,26 @@ public final class GameBoard {
     private String[][] gameMap;
     private List<BasePlayer> listOfPlayers;
     private List<String> playerMoves;
+    private List<List<BaseAngel>> angelsData;
+    private static GameBoard instance = null;
 
-    public GameBoard(final List<String> gameMap, final List<List<String>> playersData,
-                     final List<String> playersMoves, final int noRows, final int noCols) {
+    public static GameBoard getInstance() {
+        if (instance == null) {
+            instance = new GameBoard();
+        }
+
+        return instance;
+    }
+
+    private GameBoard() {}
+
+    public void setData(final List<String> gameMap, final List<List<String>> playersData,
+                        final List<String> playersMoves, final int noRows, final int noCols,
+                        final List<List<String>> angelsData) {
         this.gameMap = new String[noRows][noCols];
         this.listOfPlayers = new ArrayList<>();
         this.playerMoves = new ArrayList<>();
+        this.angelsData = new ArrayList<>();
 
         // Construct the game space
         for (int i = 0; i < noRows; ++i) {
@@ -32,6 +48,19 @@ public final class GameBoard {
 
         // Store the moves of the players
         this.playerMoves.addAll(playersMoves);
+
+        // Instantiate the angels
+        AngelFactory angelFactory = new AngelFactory();
+        for (List<String> angelList : angelsData) {
+            List<BaseAngel> tempAngelList = new ArrayList<>();
+
+            for (String angelInfo : angelList) {
+                tempAngelList.add(angelFactory.getAngel(angelInfo.split(",")));
+            }
+            this.angelsData.add(tempAngelList);
+        }
+
+        System.out.println(this.angelsData);
     }
 
     public void play() {

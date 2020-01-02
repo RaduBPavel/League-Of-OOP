@@ -13,9 +13,11 @@ public final class Main {
         ProjectInput projectInput = projectInputLoader.load();
 
         // Instantiate the game board and plays the game
-        GameBoard gameBoard = new GameBoard(projectInput.getGameMap(),
+        GameBoard gameBoard = GameBoard.getInstance();
+        gameBoard.setData(projectInput.getGameMap(),
                 projectInput.getPlayersData(), projectInput.getPlayersMoves(),
-                projectInput.getNoRows(), projectInput.getNoCols());
+                projectInput.getNoRows(), projectInput.getNoCols(),
+                projectInput.getAngelsData());
         gameBoard.play();
 
         // Writes the data to the output file
