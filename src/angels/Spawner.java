@@ -13,26 +13,34 @@ public final class Spawner extends BaseAngel {
 
     @Override
     public void visits(Pyromancer pyro) {
-        pyro.revive();
-        pyro.setCurrHP(Constants.SPAWNER_PYRO_REVIVE_HP);
+        if (!pyro.isAlive()) {
+            pyro.revive();
+            pyro.setCurrHP(Constants.SPAWNER_PYRO_REVIVE_HP);
+        }
     }
 
     @Override
     public void visits(Knight knight) {
-        knight.revive();
-        knight.setCurrHP(Constants.SPAWNER_KNIGHT_REVIVE_HP);
+        if (!knight.isAlive()) {
+            knight.revive();
+            knight.setCurrHP(Constants.SPAWNER_KNIGHT_REVIVE_HP);
+        }
     }
 
     @Override
     public void visits(Rogue rogue) {
-        rogue.revive();
-        rogue.setCurrHP(Constants.SPAWNER_ROGUE_REVIVE_HP);
+        if (!rogue.isAlive()) {
+            rogue.revive();
+            rogue.setCurrHP(Constants.SPAWNER_ROGUE_REVIVE_HP);
+        }
     }
 
     @Override
     public void visits(Wizard wizard) {
-        wizard.revive();
-        wizard.setCurrHP(Constants.SPAWNER_WIZARD_REVIVE_HP);
+        if (!wizard.isAlive()) {
+            wizard.revive();
+            wizard.setCurrHP(Constants.SPAWNER_WIZARD_REVIVE_HP);
+        }
     }
 
     @Override

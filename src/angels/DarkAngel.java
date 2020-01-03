@@ -13,21 +13,29 @@ public final class DarkAngel extends BaseAngel {
 
     @Override
     public void visits(Pyromancer pyro) {
-        pyro.takeDamage(Constants.DARK_ANGEL_PYRO_HP);
+        if (pyro.isAlive()) {
+            pyro.takeDamage(Constants.DARK_ANGEL_PYRO_HP);
+        }
     }
 
     @Override
     public void visits(Knight knight) {
+        if (knight.isAlive()) {
         knight.takeDamage(Constants.DARK_ANGEL_KNIGHT_HP);
+        }
     }
 
     @Override
     public void visits(Rogue rogue) {
+        if (rogue.isAlive()) {
         rogue.takeDamage(Constants.DARK_ANGEL_ROGUE_HP);
+        }
     }
 
     @Override
     public void visits(Wizard wizard) {
-        wizard.takeDamage(Constants.DARK_ANGEL_WIZARD_HP);
+        if (wizard.isAlive()) {
+            wizard.takeDamage(Constants.DARK_ANGEL_WIZARD_HP);
+        }
     }
 }

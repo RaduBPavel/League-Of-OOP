@@ -24,4 +24,12 @@ public abstract class BaseAngel {
     public abstract void visits(Knight knight);
     public abstract void visits(Rogue rogue);
     public abstract void visits(Wizard wizard);
+
+    public int getCurrRow() {
+        return currRow;
+    }
+
+    public int getCurrCol() {
+        return currCol;
+    }
 }

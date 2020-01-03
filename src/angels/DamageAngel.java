@@ -13,21 +13,29 @@ public final class DamageAngel extends BaseAngel {
 
     @Override
     public void visits(Pyromancer pyro) {
-        pyro.setBaseModifier(pyro.getBaseModifier() + Constants.DAMAGE_ANGEL_PYRO_MODIFIER);
+        if (pyro.isAlive()) {
+            pyro.setBaseModifier(pyro.getBaseModifier() + Constants.DAMAGE_ANGEL_PYRO_MODIFIER);
+        }
     }
 
     @Override
     public void visits(Knight knight) {
-        knight.setBaseModifier(knight.getBaseModifier() + Constants.DAMAGE_ANGEL_KNIGHT_MODIFIER);
+        if (knight.isAlive()) {
+            knight.setBaseModifier(knight.getBaseModifier() + Constants.DAMAGE_ANGEL_KNIGHT_MODIFIER);
+        }
     }
 
     @Override
     public void visits(Rogue rogue) {
-        rogue.setBaseModifier(rogue.getBaseModifier() + Constants.DAMAGE_ANGEL_ROGUE_MODIFIER);
+        if (rogue.isAlive()) {
+            rogue.setBaseModifier(rogue.getBaseModifier() + Constants.DAMAGE_ANGEL_ROGUE_MODIFIER);
+        }
     }
 
     @Override
     public void visits(Wizard wizard) {
-        wizard.setBaseModifier(wizard.getBaseModifier() + Constants.DAMAGE_ANGEL_WIZARD_MODIFIER);
+        if (wizard.isAlive()) {
+            wizard.setBaseModifier(wizard.getBaseModifier() + Constants.DAMAGE_ANGEL_WIZARD_MODIFIER);
+        }
     }
 }

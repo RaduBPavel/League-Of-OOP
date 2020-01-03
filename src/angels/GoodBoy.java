@@ -13,25 +13,33 @@ public final class GoodBoy extends BaseAngel {
 
     @Override
     public void visits(Pyromancer pyro) {
-        pyro.setBaseModifier(pyro.getBaseModifier() + Constants.GOOD_BOY_PYRO_MODIFIER);
-        pyro.setCurrHP(pyro.getCurrHP() + Constants.GOOD_BOY_PYRO_HP);
+        if (pyro.isAlive()) {
+            pyro.setBaseModifier(pyro.getBaseModifier() + Constants.GOOD_BOY_PYRO_MODIFIER);
+            pyro.setCurrHP(pyro.getCurrHP() + Constants.GOOD_BOY_PYRO_HP);
+        }
     }
 
     @Override
     public void visits(Knight knight) {
-        knight.setBaseModifier(knight.getBaseModifier() + Constants.GOOD_BOY_KNIGHT_MODIFIER);
-        knight.setCurrHP(knight.getCurrHP() + Constants.GOOD_BOY_KNIGHT_HP);
+        if (knight.isAlive()) {
+            knight.setBaseModifier(knight.getBaseModifier() + Constants.GOOD_BOY_KNIGHT_MODIFIER);
+            knight.setCurrHP(knight.getCurrHP() + Constants.GOOD_BOY_KNIGHT_HP);
+        }
     }
 
     @Override
     public void visits(Rogue rogue) {
-        rogue.setBaseModifier(rogue.getBaseModifier() + Constants.GOOD_BOY_ROGUE_MODIFIER);
-        rogue.setCurrHP(rogue.getCurrHP() + Constants.GOOD_BOY_ROGUE_HP);
+        if (rogue.isAlive()) {
+            rogue.setBaseModifier(rogue.getBaseModifier() + Constants.GOOD_BOY_ROGUE_MODIFIER);
+            rogue.setCurrHP(rogue.getCurrHP() + Constants.GOOD_BOY_ROGUE_HP);
+        }
     }
 
     @Override
     public void visits(Wizard wizard) {
-        wizard.setBaseModifier(wizard.getBaseModifier() + Constants.GOOD_BOY_WIZARD_MODIFIER);
-        wizard.setCurrHP(wizard.getCurrHP() + Constants.GOOD_BOY_WIZARD_HP);
+        if (wizard.isAlive()) {
+            wizard.setBaseModifier(wizard.getBaseModifier() + Constants.GOOD_BOY_WIZARD_MODIFIER);
+            wizard.setCurrHP(wizard.getCurrHP() + Constants.GOOD_BOY_WIZARD_HP);
+        }
     }
 }

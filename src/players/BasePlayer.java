@@ -2,6 +2,8 @@ package players;
 
 import angels.BaseAngel;
 import common.Constants;
+import strategy.DamageStrategy;
+import strategy.HealthStrategy;
 
 public abstract class BasePlayer {
     private int currRow;
@@ -21,6 +23,9 @@ public abstract class BasePlayer {
     private String playerType;
     //
     private float baseModifier;
+    //
+    private DamageStrategy damageStrategy;
+    private HealthStrategy healthStrategy;
 
     BasePlayer(final int currRow, final int currCol) {
         this.currRow = currRow;
@@ -160,6 +165,8 @@ public abstract class BasePlayer {
         this.aliveStatus = true;
     }
 
+    public abstract void applyStrategy();
+
     public final String getPlayerType() {
         return playerType;
     }
@@ -194,6 +201,22 @@ public abstract class BasePlayer {
 
     public void setBaseModifier(float baseModifier) {
         this.baseModifier = baseModifier;
+    }
+
+    public void setDamageStrategy(DamageStrategy damageStrategy) {
+        this.damageStrategy = damageStrategy;
+    }
+
+    public void setHealthStrategy(HealthStrategy healthStrategy) {
+        this.healthStrategy = healthStrategy;
+    }
+
+    public DamageStrategy getDamageStrategy() {
+        return damageStrategy;
+    }
+
+    public HealthStrategy getHealthStrategy() {
+        return healthStrategy;
     }
 
     /***

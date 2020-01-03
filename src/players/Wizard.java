@@ -2,6 +2,8 @@ package players;
 
 import angels.BaseAngel;
 import common.Constants;
+import strategy.WizardDamageStrategy;
+import strategy.WizardHealthStrategy;
 
 public final class Wizard extends BasePlayer {
     Wizard(final int currRow, final int currCol) {
@@ -9,6 +11,8 @@ public final class Wizard extends BasePlayer {
         this.setMaxHP(Constants.WIZARD_STARTING_HP);
         this.setCurrHP(Constants.WIZARD_STARTING_HP);
         this.setPlayerType("W");
+        this.setDamageStrategy(new WizardDamageStrategy());
+        this.setHealthStrategy(new WizardHealthStrategy());
     }
 
     @Override
@@ -142,5 +146,15 @@ public final class Wizard extends BasePlayer {
     @Override
     public void isVisitedBy(final BaseAngel angel) {
         angel.visits(this);
+    }
+
+    @Override
+    public void applyStrategy() {
+        if (Constants.WIZARD_MIN_PERCENT * this.getMaxHP() < this.getCurrHP()
+                && Constants.WIZARD_MAX_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+            this.getDamageStrategy().applyDamageStrategy(this);
+        } else if (Constants.WIZARD_MIN_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+            this.getHealthStrategy().applyHealthStrategy(this);
+        }
     }
 }

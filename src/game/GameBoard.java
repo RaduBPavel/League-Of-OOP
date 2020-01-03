@@ -60,11 +60,21 @@ public final class GameBoard {
             this.angelsData.add(tempAngelList);
         }
 
-        System.out.println(this.angelsData);
+        System.out.println(angelsData);
     }
 
     public void play() {
+        int counter = -1;
+
         for (String playerMove : playerMoves) {
+            counter++;
+            // Apply the strategies
+            for (BasePlayer player : listOfPlayers) {
+                if (player.isAlive()) {
+                    player.applyStrategy();
+                }
+            }
+
             // Move the players
             for (int j = 0; j < playerMove.length(); ++j) {
                 if (!listOfPlayers.get(j).isAlive()) {
@@ -109,6 +119,16 @@ public final class GameBoard {
             for (BasePlayer player : listOfPlayers) {
                 if (player.levelStatus() && player.isAlive()) {
                     player.levelUp();
+                }
+            }
+
+            // Apply the angel effects, if there are any
+            List<BaseAngel> angelList = angelsData.get(counter);
+            for (BaseAngel angel : angelList) {
+                for (BasePlayer player : listOfPlayers) {
+                    if (player.getCol() == angel.getCurrCol() && player.getRow() == angel.getCurrRow()) {
+                        player.isVisitedBy(angel);
+                    }
                 }
             }
         }

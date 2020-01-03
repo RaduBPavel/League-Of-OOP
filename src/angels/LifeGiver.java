@@ -13,22 +13,30 @@ public final class LifeGiver extends BaseAngel {
 
     @Override
     public void visits(Pyromancer pyro) {
-        pyro.setCurrHP(pyro.getCurrHP() + Constants.LIFE_GIVER_ANGEL_PYRO_HP);
+        if (pyro.isAlive()) {
+            pyro.setCurrHP(pyro.getCurrHP() + Constants.LIFE_GIVER_ANGEL_PYRO_HP);
+        }
     }
 
     @Override
     public void visits(Knight knight) {
-        knight.setCurrHP(knight.getCurrHP() + Constants.LIFE_GIVER_ANGEL_PYRO_HP);
+        if (knight.isAlive()) {
+            knight.setCurrHP(knight.getCurrHP() + Constants.LIFE_GIVER_ANGEL_PYRO_HP);
+        }
     }
 
     @Override
     public void visits(Rogue rogue) {
-        rogue.setCurrHP(rogue.getCurrHP() + Constants.LIFE_GIVER_ANGEL_PYRO_HP);
+        if (rogue.isAlive()) {
+            rogue.setCurrHP(rogue.getCurrHP() + Constants.LIFE_GIVER_ANGEL_PYRO_HP);
+        }
     }
 
     @Override
     public void visits(Wizard wizard) {
-        wizard.setCurrHP(wizard.getCurrHP() + Constants.LIFE_GIVER_ANGEL_PYRO_HP);
+        if (wizard.isAlive()) {
+            wizard.setCurrHP(wizard.getCurrHP() + Constants.LIFE_GIVER_ANGEL_PYRO_HP);
+        }
     }
 
     @Override

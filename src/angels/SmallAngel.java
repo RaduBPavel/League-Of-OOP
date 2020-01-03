@@ -13,26 +13,34 @@ public final class SmallAngel extends BaseAngel {
 
     @Override
     public void visits(Pyromancer pyro) {
-        pyro.setBaseModifier(pyro.getBaseModifier() + Constants.SMALL_ANGEL_PYRO_MODIFIER);
-        pyro.setCurrHP(pyro.getCurrHP() + Constants.SMALL_ANGEL_PYRO_HP);
+        if (pyro.isAlive()) {
+            pyro.setBaseModifier(pyro.getBaseModifier() + Constants.SMALL_ANGEL_PYRO_MODIFIER);
+            pyro.setCurrHP(pyro.getCurrHP() + Constants.SMALL_ANGEL_PYRO_HP);
+        }
     }
 
     @Override
     public void visits(Knight knight) {
-        knight.setBaseModifier(knight.getBaseModifier() + Constants.SMALL_ANGEL_KNIGHT_MODIFIER);
-        knight.setCurrHP(knight.getCurrHP() + Constants.SMALL_ANGEL_KNIGHT_HP);
+        if (knight.isAlive()) {
+            knight.setBaseModifier(knight.getBaseModifier() + Constants.SMALL_ANGEL_KNIGHT_MODIFIER);
+            knight.setCurrHP(knight.getCurrHP() + Constants.SMALL_ANGEL_KNIGHT_HP);
+        }
     }
 
     @Override
     public void visits(Rogue rogue) {
-        rogue.setBaseModifier(rogue.getBaseModifier() + Constants.SMALL_ANGEL_ROGUE_MODIFIER);
-        rogue.setCurrHP(rogue.getCurrHP() + Constants.SMALL_ANGEL_ROGUE_HP);
+        if (rogue.isAlive()) {
+            rogue.setBaseModifier(rogue.getBaseModifier() + Constants.SMALL_ANGEL_ROGUE_MODIFIER);
+            rogue.setCurrHP(rogue.getCurrHP() + Constants.SMALL_ANGEL_ROGUE_HP);
+        }
     }
 
     @Override
     public void visits(Wizard wizard) {
-        wizard.setBaseModifier(wizard.getBaseModifier() + Constants.SMALL_ANGEL_WIZARD_MODIFIER);
-        wizard.setCurrHP(wizard.getCurrHP() + Constants.SMALL_ANGEL_WIZARD_HP);
+        if (wizard.isAlive()) {
+            wizard.setBaseModifier(wizard.getBaseModifier() + Constants.SMALL_ANGEL_WIZARD_MODIFIER);
+            wizard.setCurrHP(wizard.getCurrHP() + Constants.SMALL_ANGEL_WIZARD_HP);
+        }
     }
 
     @Override

@@ -2,6 +2,8 @@ package players;
 
 import angels.BaseAngel;
 import common.Constants;
+import strategy.PyroDamageStrategy;
+import strategy.PyroHealthStrategy;
 
 public final class Pyromancer extends BasePlayer {
 
@@ -10,6 +12,8 @@ public final class Pyromancer extends BasePlayer {
         this.setMaxHP(Constants.PYRO_STARTING_HP);
         this.setCurrHP(Constants.PYRO_STARTING_HP);
         this.setPlayerType("P");
+        this.setDamageStrategy(new PyroDamageStrategy());
+        this.setHealthStrategy(new PyroHealthStrategy());
     }
 
     @Override
@@ -152,5 +156,15 @@ public final class Pyromancer extends BasePlayer {
     @Override
     public void isVisitedBy(final BaseAngel angel) {
         angel.visits(this);
+    }
+
+    @Override
+    public void applyStrategy() {
+        if (Constants.PYRO_MIN_PERCENT * this.getMaxHP() < this.getCurrHP()
+                && Constants.PYRO_MAX_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+            this.getDamageStrategy().applyDamageStrategy(this);
+        } else if (Constants.PYRO_MIN_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+            this.getHealthStrategy().applyHealthStrategy(this);
+        }
     }
 }

@@ -2,6 +2,8 @@ package players;
 
 import angels.BaseAngel;
 import common.Constants;
+import strategy.KnightDamageStrategy;
+import strategy.KnightHealthStrategy;
 
 public final class Knight extends BasePlayer {
     Knight(final int currRow, final int currCol) {
@@ -9,6 +11,8 @@ public final class Knight extends BasePlayer {
         this.setMaxHP(Constants.KNIGHT_STARTING_HP);
         this.setCurrHP(Constants.KNIGHT_STARTING_HP);
         this.setPlayerType("K");
+        this.setDamageStrategy(new KnightDamageStrategy());
+        this.setHealthStrategy(new KnightHealthStrategy());
     }
 
     @Override
@@ -46,14 +50,18 @@ public final class Knight extends BasePlayer {
             baseDoT += baseDoT * Constants.PYRO_VOLCANIC_MODIFIER;
         }
 
-        float modifierFirst = pyromancer.getBaseModifier() + Constants.PYRO_VS_KNIGHT_FIREBLAST_MODIFIER;
-        float modifierSecond = pyromancer.getBaseModifier() + Constants.PYRO_VS_KNIGHT_IGNITE_MODIFIER;
-        float modifierDoT = pyromancer.getBaseModifier() + Constants.PYRO_VS_KNIGHT_IGNITE_MODIFIER;
+        float modifierFirst = pyromancer.getBaseModifier()
+                + Constants.PYRO_VS_KNIGHT_FIREBLAST_MODIFIER;
+        float modifierSecond = pyromancer.getBaseModifier()
+                + Constants.PYRO_VS_KNIGHT_IGNITE_MODIFIER;
+        float modifierDoT = pyromancer.getBaseModifier()
+                + Constants.PYRO_VS_KNIGHT_IGNITE_MODIFIER;
 
         // Apply damage
         this.takeDamage(Math.round(baseFirst * modifierFirst)
                 + Math.round(baseSecond * modifierSecond));
-        this.applyDoT(Math.round(baseDoT * modifierDoT), Constants.IGNITE_OVERTIME_ROUNDS);
+        this.applyDoT(Math.round(baseDoT * modifierDoT),
+                Constants.IGNITE_OVERTIME_ROUNDS);
     }
 
     @Override
@@ -70,8 +78,10 @@ public final class Knight extends BasePlayer {
         float baseSecond = knight.secondAbility(typeOfLand);
 
         // Modifiers
-        float modifierFirst = knight.getBaseModifier() + Constants.KNIGHT_VS_KNIGHT_EXECUTE_MODIFIER;
-        float modifierSecond = knight.getBaseModifier() +  Constants.KNIGHT_VS_KNIGHT_SLAM_MODIFIER;
+        float modifierFirst = knight.getBaseModifier()
+                + Constants.KNIGHT_VS_KNIGHT_EXECUTE_MODIFIER;
+        float modifierSecond = knight.getBaseModifier()
+                +  Constants.KNIGHT_VS_KNIGHT_SLAM_MODIFIER;
 
         // Apply damage
         this.takeDamage(Math.round(baseFirst * modifierFirst)
@@ -91,8 +101,10 @@ public final class Knight extends BasePlayer {
             overtimeRounds = Constants.PARALYSIS_EXTENDED_OVERTIME;
         }
 
-        float modifierFirst = rogue.getBaseModifier() + Constants.ROGUE_VS_KNIGHT_BACKSTAB_MODIFIER;
-        float modifierSecond = rogue.getBaseModifier() + Constants.ROGUE_VS_KNIGHT_PARALYSIS_MODIFIER;
+        float modifierFirst = rogue.getBaseModifier()
+                + Constants.ROGUE_VS_KNIGHT_BACKSTAB_MODIFIER;
+        float modifierSecond = rogue.getBaseModifier()
+                + Constants.ROGUE_VS_KNIGHT_PARALYSIS_MODIFIER;
 
         // Apply damage
         this.takeDamage(Math.round(baseFirst * modifierFirst)
@@ -108,8 +120,10 @@ public final class Knight extends BasePlayer {
         float baseSecond = wizard.secondAbility(typeOfLand);
 
         // Modifiers
-        float modifierFirst = wizard.getBaseModifier() + Constants.WIZARD_VS_KNIGHT_DRAIN_MODIFIER;
-        float modifierSecond = wizard.getBaseModifier() + Constants.WIZARD_VS_KNIGHT_DEFLECT_MODIFIER;
+        float modifierFirst = wizard.getBaseModifier()
+                + Constants.WIZARD_VS_KNIGHT_DRAIN_MODIFIER;
+        float modifierSecond = wizard.getBaseModifier()
+                + Constants.WIZARD_VS_KNIGHT_DEFLECT_MODIFIER;
 
         baseFirst *= modifierFirst;
         baseSecond *= modifierSecond;
@@ -151,5 +165,15 @@ public final class Knight extends BasePlayer {
     @Override
     public void isVisitedBy(final BaseAngel angel) {
         angel.visits(this);
+    }
+
+    @Override
+    public void applyStrategy() {
+        if (Constants.KNIGHT_MIN_PERCENT * this.getMaxHP() < this.getCurrHP()
+                && Constants.KNIGHT_MAX_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+            this.getDamageStrategy().applyDamageStrategy(this);
+        } else if (Constants.KNIGHT_MIN_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+            this.getHealthStrategy().applyHealthStrategy(this);
+        }
     }
 }

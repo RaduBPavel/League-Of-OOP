@@ -12,21 +12,29 @@ public final class TheDoomer extends BaseAngel {
 
     @Override
     public void visits(Pyromancer pyro) {
-        pyro.takeDamage(pyro.getCurrHP());
+        if (pyro.isAlive()) {
+            pyro.takeDamage(pyro.getCurrHP());
+        }
     }
 
     @Override
     public void visits(Knight knight) {
-        knight.takeDamage(knight.getCurrHP());
+        if (knight.isAlive()) {
+            knight.takeDamage(knight.getCurrHP());
+        }
     }
 
     @Override
     public void visits(Rogue rogue) {
-        rogue.takeDamage(rogue.getCurrHP());
+        if (rogue.isAlive()) {
+            rogue.takeDamage(rogue.getCurrHP());
+        }
     }
 
     @Override
     public void visits(Wizard wizard) {
-        wizard.takeDamage(wizard.getCurrHP());
+        if (wizard.isAlive()) {
+            wizard.takeDamage(wizard.getCurrHP());
+        }
     }
 }

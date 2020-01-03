@@ -13,26 +13,34 @@ public final class Dracula extends BaseAngel {
 
     @Override
     public void visits(Pyromancer pyro) {
-        pyro.setBaseModifier(pyro.getBaseModifier() - Constants.DRACULA_PYRO_MODIFIER);
-        pyro.takeDamage(Constants.DRACULA_PYRO_HP);
+        if (pyro.isAlive()) {
+            pyro.setBaseModifier(pyro.getBaseModifier() - Constants.DRACULA_PYRO_MODIFIER);
+            pyro.takeDamage(Constants.DRACULA_PYRO_HP);
+        }
     }
 
     @Override
     public void visits(Knight knight) {
-        knight.setBaseModifier(knight.getBaseModifier() - Constants.DRACULA_KNIGHT_MODIFIER);
-        knight.takeDamage(Constants.DRACULA_KNIGHT_HP);
+        if (knight.isAlive()) {
+            knight.setBaseModifier(knight.getBaseModifier() - Constants.DRACULA_KNIGHT_MODIFIER);
+            knight.takeDamage(Constants.DRACULA_KNIGHT_HP);
+        }
     }
 
     @Override
     public void visits(Rogue rogue) {
-        rogue.setBaseModifier(rogue.getBaseModifier() - Constants.DRACULA_ROGUE_MODIFIER);
-        rogue.takeDamage(Constants.DRACULA_ROGUE_HP);
+        if (rogue.isAlive()) {
+            rogue.setBaseModifier(rogue.getBaseModifier() - Constants.DRACULA_ROGUE_MODIFIER);
+            rogue.takeDamage(Constants.DRACULA_ROGUE_HP);
+        }
     }
 
     @Override
     public void visits(Wizard wizard) {
-        wizard.setBaseModifier(wizard.getBaseModifier() - Constants.DRACULA_WIZARD_MODIFIER);
-        wizard.takeDamage(Constants.DRACULA_WIZARD_HP);
+        if (wizard.isAlive()) {
+            wizard.setBaseModifier(wizard.getBaseModifier() - Constants.DRACULA_WIZARD_MODIFIER);
+            wizard.takeDamage(Constants.DRACULA_WIZARD_HP);
+        }
     }
 
     @Override

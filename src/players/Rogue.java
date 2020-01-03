@@ -2,6 +2,8 @@ package players;
 
 import angels.BaseAngel;
 import common.Constants;
+import strategy.RogueDamageStrategy;
+import strategy.RogueHealthStrategy;
 
 public final class Rogue extends BasePlayer {
     private int numOfBackstabs;
@@ -12,6 +14,8 @@ public final class Rogue extends BasePlayer {
         this.setCurrHP(Constants.ROGUE_STARTING_HP);
         this.setPlayerType("R");
         this.numOfBackstabs = 0;
+        this.setDamageStrategy(new RogueDamageStrategy());
+        this.setHealthStrategy(new RogueHealthStrategy());
     }
 
     @Override
@@ -163,5 +167,15 @@ public final class Rogue extends BasePlayer {
     @Override
     public void isVisitedBy(final BaseAngel angel) {
         angel.visits(this);
+    }
+
+    @Override
+    public void applyStrategy() {
+        if (Constants.ROGUE_MIN_PERCENT * this.getMaxHP() < this.getCurrHP()
+                && Constants.ROGUE_MAX_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+            this.getDamageStrategy().applyDamageStrategy(this);
+        } else if (Constants.ROGUE_MIN_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+            this.getHealthStrategy().applyHealthStrategy(this);
+        }
     }
 }
