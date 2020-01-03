@@ -1,5 +1,6 @@
 package players;
 
+import angels.BaseAngel;
 import common.Constants;
 
 public final class Pyromancer extends BasePlayer {
@@ -46,14 +47,14 @@ public final class Pyromancer extends BasePlayer {
             baseDoT += baseDoT * Constants.PYRO_VOLCANIC_MODIFIER;
         }
 
-        float modifierFirst = baseFirst * Constants.PYRO_VS_PYRO_FIREBLAST_MODIFIER;
-        float modifierSecond = baseSecond * Constants.PYRO_VS_PYRO_IGNITE_MODIFIER;
-        float modifierDoT = baseDoT * Constants.PYRO_VS_PYRO_IGNITE_MODIFIER;
+        float modifierFirst = pyromancer.getBaseModifier() + Constants.PYRO_VS_PYRO_FIREBLAST_MODIFIER;
+        float modifierSecond = pyromancer.getBaseModifier() + Constants.PYRO_VS_PYRO_IGNITE_MODIFIER;
+        float modifierDoT = pyromancer.getBaseModifier() + Constants.PYRO_VS_PYRO_IGNITE_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst + modifierFirst)
-                + Math.round(baseSecond + modifierSecond));
-        this.applyDoT(Math.round(baseDoT + modifierDoT), Constants.IGNITE_OVERTIME_ROUNDS);
+        this.takeDamage(Math.round(baseFirst * modifierFirst)
+                + Math.round(baseSecond * modifierSecond));
+        this.applyDoT(Math.round(baseDoT * modifierDoT), Constants.IGNITE_OVERTIME_ROUNDS);
     }
 
     @Override
@@ -70,12 +71,12 @@ public final class Pyromancer extends BasePlayer {
         float baseSecond = knight.secondAbility(typeOfLand);
 
         // Modifiers
-        float modifierFirst = baseFirst * Constants.KNIGHT_VS_PYRO_EXECUTE_MODIFIER;
-        float modifierSecond = baseSecond * Constants.KNIGHT_VS_PYRO_SLAM_MODIFIER;
+        float modifierFirst = knight.getBaseModifier() + Constants.KNIGHT_VS_PYRO_EXECUTE_MODIFIER;
+        float modifierSecond = knight.getBaseModifier() + Constants.KNIGHT_VS_PYRO_SLAM_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst + modifierFirst)
-                + Math.round(baseSecond + modifierSecond));
+        this.takeDamage(Math.round(baseFirst * modifierFirst)
+                + Math.round(baseSecond * modifierSecond));
         this.applyStun(Constants.SLAM_OVERTIME_ROUNDS);
     }
 
@@ -91,13 +92,13 @@ public final class Pyromancer extends BasePlayer {
             overtimeRounds = Constants.PARALYSIS_EXTENDED_OVERTIME;
         }
 
-        float modifierFirst = baseFirst * Constants.ROGUE_VS_PYRO_BACKSTAB_MODIFIER;
-        float modifierSecond = baseSecond * Constants.ROGUE_VS_PYRO_PARALYSIS_MODIFIER;
+        float modifierFirst = rogue.getBaseModifier() + Constants.ROGUE_VS_PYRO_BACKSTAB_MODIFIER;
+        float modifierSecond = rogue.getBaseModifier() + Constants.ROGUE_VS_PYRO_PARALYSIS_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst + modifierFirst)
-            + Math.round(baseSecond + modifierSecond));
-        this.applyDoT(Math.round(baseSecond + modifierSecond), overtimeRounds);
+        this.takeDamage(Math.round(baseFirst * modifierFirst)
+            + Math.round(baseSecond * modifierSecond));
+        this.applyDoT(Math.round(baseSecond * modifierSecond), overtimeRounds);
         this.applyStun(overtimeRounds);
     }
 
@@ -108,11 +109,11 @@ public final class Pyromancer extends BasePlayer {
         float baseSecond = wizard.secondAbility(typeOfLand);
 
         // Modifiers
-        float modifierFirst = baseFirst * Constants.WIZARD_VS_PYRO_DRAIN_MODIFIER;
-        float modifierSecond = baseSecond * Constants.WIZARD_VS_PYRO_DEFLECT_MODIFIER;
+        float modifierFirst = wizard.getBaseModifier() + Constants.WIZARD_VS_PYRO_DRAIN_MODIFIER;
+        float modifierSecond = wizard.getBaseModifier() + Constants.WIZARD_VS_PYRO_DEFLECT_MODIFIER;
 
-        baseFirst += modifierFirst;
-        baseSecond += modifierSecond;
+        baseFirst *= modifierFirst;
+        baseSecond *= modifierSecond;
 
         float baseDrain = Math.min(Constants.DRAIN_HP_MODIFIER * this.getMaxHP(),
                 this.getCurrHP());
@@ -146,5 +147,10 @@ public final class Pyromancer extends BasePlayer {
         }
 
         return baseDamage;
+    }
+
+    @Override
+    public void isVisitedBy(final BaseAngel angel) {
+        angel.visits(this);
     }
 }

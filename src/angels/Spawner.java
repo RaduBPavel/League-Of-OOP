@@ -1,8 +1,38 @@
 package angels;
 
+import common.Constants;
+import players.Knight;
+import players.Pyromancer;
+import players.Rogue;
+import players.Wizard;
+
 public final class Spawner extends BaseAngel {
     public Spawner(int currRow, int currCol) {
         super(currRow, currCol);
+    }
+
+    @Override
+    public void visits(Pyromancer pyro) {
+        pyro.revive();
+        pyro.setCurrHP(Constants.SPAWNER_PYRO_REVIVE_HP);
+    }
+
+    @Override
+    public void visits(Knight knight) {
+        knight.revive();
+        knight.setCurrHP(Constants.SPAWNER_KNIGHT_REVIVE_HP);
+    }
+
+    @Override
+    public void visits(Rogue rogue) {
+        rogue.revive();
+        rogue.setCurrHP(Constants.SPAWNER_ROGUE_REVIVE_HP);
+    }
+
+    @Override
+    public void visits(Wizard wizard) {
+        wizard.revive();
+        wizard.setCurrHP(Constants.SPAWNER_WIZARD_REVIVE_HP);
     }
 
     @Override

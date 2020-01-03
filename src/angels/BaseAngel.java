@@ -1,5 +1,10 @@
 package angels;
 
+import players.Knight;
+import players.Pyromancer;
+import players.Rogue;
+import players.Wizard;
+
 public abstract class BaseAngel {
     protected int currRow;
     protected int currCol;
@@ -13,4 +18,10 @@ public abstract class BaseAngel {
         this.currCol = -1;
         this.currRow = -1;
     }
+
+    // Functions used for Double Dispatch
+    public abstract void visits(Pyromancer pyro);
+    public abstract void visits(Knight knight);
+    public abstract void visits(Rogue rogue);
+    public abstract void visits(Wizard wizard);
 }

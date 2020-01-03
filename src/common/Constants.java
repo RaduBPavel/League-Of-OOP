@@ -97,5 +97,72 @@ public final class Constants {
     public static final float ROGUE_VS_KNIGHT_PARALYSIS_MODIFIER = -0.2f;
     public static final float ROGUE_VS_PYRO_PARALYSIS_MODIFIER = 0.2f;
     public static final float ROGUE_VS_WIZARD_PARALYSIS_MODIFIER = 0.25f;
+
+    // Damage Angel modifiers
+    public static final float DAMAGE_ANGEL_KNIGHT_MODIFIER = 0.15f;
+    public static final float DAMAGE_ANGEL_PYRO_MODIFIER = 0.2f;
+    public static final float DAMAGE_ANGEL_ROGUE_MODIFIER = 0.3f;
+    public static final float DAMAGE_ANGEL_WIZARD_MODIFIER = 0.4f;
+
+    // Dark Angel modifiers
+    public static final int DARK_ANGEL_KNIGHT_HP = 40;
+    public static final int DARK_ANGEL_PYRO_HP = 30;
+    public static final int DARK_ANGEL_ROGUE_HP = 10;
+    public static final int DARK_ANGEL_WIZARD_HP = 20;
+
+    // Dracula modifiers
+    public static final float DRACULA_KNIGHT_MODIFIER = 0.2f;
+    public static final int DRACULA_KNIGHT_HP = 60;
+    public static final float DRACULA_PYRO_MODIFIER = 0.3f;
+    public static final int DRACULA_PYRO_HP = 40;
+    public static final float DRACULA_ROGUE_MODIFIER = 0.1f;
+    public static final int DRACULA_ROGUE_HP = 35;
+    public static final float DRACULA_WIZARD_MODIFIER = 0.4f;
+    public static final int DRACULA_WIZARD_HP = 20;
+
+    // Good Boy modifiers
+    public static final float GOOD_BOY_KNIGHT_MODIFIER = 0.4f;
+    public static final int GOOD_BOY_KNIGHT_HP = 20;
+    public static final float GOOD_BOY_PYRO_MODIFIER = 0.5f;
+    public static final int GOOD_BOY_PYRO_HP = 30;
+    public static final float GOOD_BOY_ROGUE_MODIFIER = 0.4f;
+    public static final int GOOD_BOY_ROGUE_HP = 40;
+    public static final float GOOD_BOY_WIZARD_MODIFIER = 0.3f;
+    public static final int GOOD_BOY_WIZARD_HP = 50;
+
+    // Level Up Angel modifiers
+    public static final float LEVEL_UP_ANGEL_KNIGHT_MODIFIER = 0.1f;
+    public static final float LEVEL_UP_ANGEL_PYRO_MODIFIER = 0.2f;
+    public static final float LEVEL_UP_ANGEL_ROGUE_MODIFIER = 0.15f;
+    public static final float LEVEL_UP_ANGEL_WIZARD_MODIFIER = 0.25f;
+
+    // Life Giver Angel modifier
+    public static final int LIFE_GIVER_ANGEL_KNIGHT_HP = 100;
+    public static final int LIFE_GIVER_ANGEL_PYRO_HP = 80;
+    public static final int LIFE_GIVER_ANGEL_ROGUE_HP = 90;
+    public static final int LIFE_GIVER_ANGEL_WIZARD_HP = 120;
+
+    // Small Angel modifier
+    public static final float SMALL_ANGEL_KNIGHT_MODIFIER = 0.1f;
+    public static final int SMALL_ANGEL_KNIGHT_HP = 10;
+    public static final float SMALL_ANGEL_PYRO_MODIFIER = 0.15f;
+    public static final int SMALL_ANGEL_PYRO_HP = 15;
+    public static final float SMALL_ANGEL_ROGUE_MODIFIER = 0.05f;
+    public static final int SMALL_ANGEL_ROGUE_HP = 20;
+    public static final float SMALL_ANGEL_WIZARD_MODIFIER = 0.1f;
+    public static final int SMALL_ANGEL_WIZARD_HP = 25;
+
+    // Spawner modifier
+    public static final int SPAWNER_KNIGHT_REVIVE_HP = 200;
+    public static final int SPAWNER_PYRO_REVIVE_HP = 150;
+    public static final int SPAWNER_ROGUE_REVIVE_HP = 180;
+    public static final int SPAWNER_WIZARD_REVIVE_HP = 120;
+
+    // XPAngel modifier
+    public static final int XP_ANGEL_KNIGHT_XP_MODIFIER = 45;
+    public static final int XP_ANGEL_PYRO_XP_MODIFIER = 50;
+    public static final int XP_ANGEL_ROGUE_XP_MODIFIER = 40;
+    public static final int XP_ANGEL_WIZARD_XP_MODIFIER = 60;
+
     private Constants() { }
 }

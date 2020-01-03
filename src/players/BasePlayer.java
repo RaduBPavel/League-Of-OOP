@@ -1,5 +1,6 @@
 package players;
 
+import angels.BaseAngel;
 import common.Constants;
 
 public abstract class BasePlayer {
@@ -18,6 +19,8 @@ public abstract class BasePlayer {
     private int roundsOfDoT;
     private boolean aliveStatus;
     private String playerType;
+    //
+    private float baseModifier;
 
     BasePlayer(final int currRow, final int currCol) {
         this.currRow = currRow;
@@ -30,6 +33,7 @@ public abstract class BasePlayer {
         this.damageOfDoT = 0;
         this.roundsOfDoT = 0;
         this.aliveStatus = true;
+        this.baseModifier = 1f;
     }
 
     public final void move(final String direction) {
@@ -52,9 +56,13 @@ public abstract class BasePlayer {
     }
 
     // XP manipulation functions
-    public final void addXP(final int defeatedLevel) {
+    public final void addXP(BasePlayer player) {
         xpPoints += Math.max(0, Constants.BASE_LEVEL_UP_XP
-                - (this.currLevel - defeatedLevel) * Constants.LEVEL_UP_XP_MILESTONE);
+                - (this.currLevel - player.getLevel()) * Constants.LEVEL_UP_XP_MILESTONE);
+    }
+
+    public final void addXP(int xpAmount) {
+        xpPoints += xpAmount;
     }
 
     public final boolean levelStatus() {
@@ -82,8 +90,11 @@ public abstract class BasePlayer {
     public abstract float firstAbility(String typeOfLand);
     public abstract float secondAbility(String typeOfLand);
 
+    // Function used for Double Dispatch in relation with the angels
+    public abstract void isVisitedBy(BaseAngel angel);
+
     // Status modifier functions
-    final void takeDamage(final int damageTaken) {
+    public final void takeDamage(final int damageTaken) {
         this.currHP -= damageTaken;
         if (currHP <= 0) {
             aliveStatus = false;
@@ -145,6 +156,10 @@ public abstract class BasePlayer {
         return aliveStatus;
     }
 
+    public final void revive() {
+        this.aliveStatus = true;
+    }
+
     public final String getPlayerType() {
         return playerType;
     }
@@ -171,6 +186,14 @@ public abstract class BasePlayer {
 
     public final int getXpPoints() {
         return xpPoints;
+    }
+
+    public float getBaseModifier() {
+        return baseModifier;
+    }
+
+    public void setBaseModifier(float baseModifier) {
+        this.baseModifier = baseModifier;
     }
 
     /***

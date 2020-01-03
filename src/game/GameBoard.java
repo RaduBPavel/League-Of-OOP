@@ -126,13 +126,13 @@ public final class GameBoard {
 
         // Adds corresponding XP
         if (firstPlayer.isAlive() && !secondPlayer.isAlive()) {
-            firstPlayer.addXP(secondPlayer.getLevel());
+            firstPlayer.addXP(secondPlayer);
         } else if (!firstPlayer.isAlive() && secondPlayer.isAlive()) {
-            secondPlayer.addXP(firstPlayer.getLevel());
+            secondPlayer.addXP(firstPlayer);
         } else if (!firstPlayer.isAlive()) {
-            int tempLevel = firstPlayer.getLevel();
-            firstPlayer.addXP(secondPlayer.getLevel());
-            secondPlayer.addXP(tempLevel);
+            BasePlayer tempPlayer = firstPlayer;
+            firstPlayer.addXP(secondPlayer);
+            secondPlayer.addXP(tempPlayer);
         }
     }
 
