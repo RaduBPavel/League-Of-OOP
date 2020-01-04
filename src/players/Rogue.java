@@ -13,6 +13,7 @@ public final class Rogue extends BasePlayer {
         this.setMaxHP(Constants.ROGUE_STARTING_HP);
         this.setCurrHP(Constants.ROGUE_STARTING_HP);
         this.setPlayerType("R");
+        this.setPlayerName("Rogue");
         this.numOfBackstabs = 0;
         this.setDamageStrategy(new RogueDamageStrategy());
         this.setHealthStrategy(new RogueHealthStrategy());

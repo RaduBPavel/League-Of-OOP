@@ -21,6 +21,7 @@ public abstract class BasePlayer {
     private int roundsOfDoT;
     private boolean aliveStatus;
     private String playerType;
+    private String playerName;
     //
     private float baseModifier;
     //
@@ -63,6 +64,11 @@ public abstract class BasePlayer {
     // XP manipulation functions
     public final void addXP(BasePlayer player) {
         xpPoints += Math.max(0, Constants.BASE_LEVEL_UP_XP
+                - (this.currLevel - player.getLevel()) * Constants.LEVEL_UP_XP_MILESTONE);
+    }
+
+    public final int computeXP(BasePlayer player) {
+        return Math.max(0, Constants.BASE_LEVEL_UP_XP
                 - (this.currLevel - player.getLevel()) * Constants.LEVEL_UP_XP_MILESTONE);
     }
 
@@ -169,6 +175,12 @@ public abstract class BasePlayer {
 
     public final String getPlayerType() {
         return playerType;
+    }
+
+    public final String getPlayerName() { return playerName; }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public final void setPlayerType(final String playerType) {

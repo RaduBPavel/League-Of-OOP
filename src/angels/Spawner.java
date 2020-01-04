@@ -9,6 +9,8 @@ import players.Wizard;
 public final class Spawner extends BaseAngel {
     public Spawner(int currRow, int currCol) {
         super(currRow, currCol);
+        this.setHelperStatus(true);
+        this.setAngelName("Spawner");
     }
 
     @Override
@@ -41,13 +43,5 @@ public final class Spawner extends BaseAngel {
             wizard.revive();
             wizard.setCurrHP(Constants.SPAWNER_WIZARD_REVIVE_HP);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Spawner{" +
-                "currRow=" + currRow +
-                ", currCol=" + currCol +
-                '}';
     }
 }

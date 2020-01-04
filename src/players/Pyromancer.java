@@ -12,6 +12,7 @@ public final class Pyromancer extends BasePlayer {
         this.setMaxHP(Constants.PYRO_STARTING_HP);
         this.setCurrHP(Constants.PYRO_STARTING_HP);
         this.setPlayerType("P");
+        this.setPlayerName("Pyromancer");
         this.setDamageStrategy(new PyroDamageStrategy());
         this.setHealthStrategy(new PyroHealthStrategy());
     }

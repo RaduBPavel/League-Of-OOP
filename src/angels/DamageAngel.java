@@ -9,6 +9,8 @@ import players.Wizard;
 public final class DamageAngel extends BaseAngel {
     public DamageAngel(int currRow, int currCol) {
         super(currRow, currCol);
+        this.setHelperStatus(true);
+        this.setAngelName("DamageAngel");
     }
 
     @Override

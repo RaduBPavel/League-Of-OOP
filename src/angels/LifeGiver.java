@@ -9,6 +9,8 @@ import players.Wizard;
 public final class LifeGiver extends BaseAngel {
     public LifeGiver(int currRow, int currCol) {
         super(currRow, currCol);
+        this.setHelperStatus(true);
+        this.setAngelName("LifeGiver");
     }
 
     @Override
@@ -37,13 +39,5 @@ public final class LifeGiver extends BaseAngel {
         if (wizard.isAlive()) {
             wizard.setCurrHP(wizard.getCurrHP() + Constants.LIFE_GIVER_ANGEL_PYRO_HP);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "LifeGiver{" +
-                "currRow=" + currRow +
-                ", currCol=" + currCol +
-                '}';
     }
 }

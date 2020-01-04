@@ -9,6 +9,8 @@ import players.Wizard;
 public final class LevelUpAngel extends BaseAngel {
     public LevelUpAngel(int currRow, int currCol) {
         super(currRow, currCol);
+        this.setHelperStatus(true);
+        this.setAngelName("LevelUpAngel");
     }
 
     @Override

@@ -8,6 +8,8 @@ import players.Wizard;
 public final class TheDoomer extends BaseAngel {
     public TheDoomer(int currRow, int currCol) {
         super(currRow, currCol);
+        this.setHelperStatus(false);
+        this.setAngelName("TheDoomer");
     }
 
     @Override

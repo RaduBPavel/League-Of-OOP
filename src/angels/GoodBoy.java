@@ -9,6 +9,8 @@ import players.Wizard;
 public final class GoodBoy extends BaseAngel {
     public GoodBoy(int currRow, int currCol) {
         super(currRow, currCol);
+        this.setHelperStatus(true);
+        this.setAngelName("GoodBoy");
     }
 
     @Override

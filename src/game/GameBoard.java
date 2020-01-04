@@ -1,6 +1,7 @@
 package game;
 
 import angels.AngelFactory;
+import observer.GrandMagician;
 import players.BasePlayer;
 import players.PlayerFactory;
 import angels.BaseAngel;
@@ -14,6 +15,7 @@ public final class GameBoard {
     private List<String> playerMoves;
     private List<List<BaseAngel>> angelsData;
     private static GameBoard instance = null;
+    private GrandMagician grandMagician = null;
 
     public static GameBoard getInstance() {
         if (instance == null) {
@@ -27,11 +29,12 @@ public final class GameBoard {
 
     public void setData(final List<String> gameMap, final List<List<String>> playersData,
                         final List<String> playersMoves, final int noRows, final int noCols,
-                        final List<List<String>> angelsData) {
+                        final List<List<String>> angelsData, final GrandMagician grandMagician) {
         this.gameMap = new String[noRows][noCols];
         this.listOfPlayers = new ArrayList<>();
         this.playerMoves = new ArrayList<>();
         this.angelsData = new ArrayList<>();
+        this.grandMagician = grandMagician;
 
         // Construct the game space
         for (int i = 0; i < noRows; ++i) {
@@ -59,17 +62,22 @@ public final class GameBoard {
             }
             this.angelsData.add(tempAngelList);
         }
-
-        System.out.println(angelsData);
     }
 
     public void play() {
         int counter = -1;
 
         for (String playerMove : playerMoves) {
+            List<Integer> prevLevelList = new ArrayList<>();
+            prevLevelList.clear();
+
+            // Acknowledge round number
             counter++;
-            // Apply the strategies
+            grandMagician.updateRound(counter + 1);
+
+            // Apply the strategies and store initial levels
             for (BasePlayer player : listOfPlayers) {
+                prevLevelList.add(player.getLevel());
                 if (player.isAlive()) {
                     player.applyStrategy();
                 }
@@ -110,24 +118,53 @@ public final class GameBoard {
                     if (listOfPlayers.get(j).getRow() == listOfPlayers.get(k).getRow()
                             && listOfPlayers.get(j).getCol() == listOfPlayers.get(k).getCol()) {
                         fight(listOfPlayers.get(j), listOfPlayers.get(k));
+
+                        // Update the magician with a kill message
+                        if (!listOfPlayers.get(j).isAlive() && listOfPlayers.get(k).isAlive()) {
+                            grandMagician.updatePlayerKill(listOfPlayers.get(j), j,
+                                    listOfPlayers.get(k), k);
+
+                        } else if (listOfPlayers.get(j).isAlive() && !listOfPlayers.get(k).isAlive()) {
+                            grandMagician.updatePlayerKill(listOfPlayers.get(k), k,
+                                    listOfPlayers.get(j), j);
+                        }
                         break;
                     }
                 }
             }
 
             // Checks if any players has leveled up
+            int levelIndex = -1;
             for (BasePlayer player : listOfPlayers) {
+                levelIndex++;
                 if (player.levelStatus() && player.isAlive()) {
                     player.levelUp();
+                    grandMagician.updateLevel(player, levelIndex, prevLevelList.get(levelIndex));
                 }
             }
 
             // Apply the angel effects, if there are any
             List<BaseAngel> angelList = angelsData.get(counter);
             for (BaseAngel angel : angelList) {
+                // Update the grand magician with the angel position
+                grandMagician.updateAngelSpawn(angel);
+
+                int index = -1;
                 for (BasePlayer player : listOfPlayers) {
+                    index++;
                     if (player.getCol() == angel.getCurrCol() && player.getRow() == angel.getCurrRow()) {
+                        String action = "none";
+                        boolean playerInitialStatus = player.isAlive();
                         player.isVisitedBy(angel);
+
+                        // Checks if the player was killed or revived and update the magician
+                        if (playerInitialStatus && playerInitialStatus != player.isAlive()) {
+                            action = "killed";
+                        } else if (!playerInitialStatus &&  playerInitialStatus != player.isAlive()) {
+                            action = "revived";
+                        }
+
+                        grandMagician.updateAngelAction(angel, player, index, action);
                     }
                 }
             }
@@ -150,9 +187,9 @@ public final class GameBoard {
         } else if (!firstPlayer.isAlive() && secondPlayer.isAlive()) {
             secondPlayer.addXP(firstPlayer);
         } else if (!firstPlayer.isAlive()) {
-            BasePlayer tempPlayer = firstPlayer;
+            int tempXP = secondPlayer.computeXP(firstPlayer);
             firstPlayer.addXP(secondPlayer);
-            secondPlayer.addXP(tempPlayer);
+            secondPlayer.addXP(tempXP);
         }
     }
 

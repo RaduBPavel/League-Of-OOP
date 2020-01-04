@@ -6,8 +6,10 @@ import players.Rogue;
 import players.Wizard;
 
 public abstract class BaseAngel {
-    protected int currRow;
-    protected int currCol;
+    private int currRow;
+    private int currCol;
+    private boolean helperStatus;
+    private String angelName;
 
     public BaseAngel(final int currRow, final int currCol) {
         this.currRow = currRow;
@@ -31,5 +33,21 @@ public abstract class BaseAngel {
 
     public int getCurrCol() {
         return currCol;
+    }
+
+    public boolean isHelper() {
+        return helperStatus;
+    }
+
+    public void setHelperStatus(boolean helperStatus) {
+        this.helperStatus = helperStatus;
+    }
+
+    public String getAngelName() {
+        return angelName;
+    }
+
+    public void setAngelName(String angelName) {
+        this.angelName = angelName;
     }
 }

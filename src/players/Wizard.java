@@ -11,6 +11,7 @@ public final class Wizard extends BasePlayer {
         this.setMaxHP(Constants.WIZARD_STARTING_HP);
         this.setCurrHP(Constants.WIZARD_STARTING_HP);
         this.setPlayerType("W");
+        this.setPlayerName("Wizard");
         this.setDamageStrategy(new WizardDamageStrategy());
         this.setHealthStrategy(new WizardHealthStrategy());
     }

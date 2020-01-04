@@ -9,6 +9,8 @@ import players.Wizard;
 public final class Dracula extends BaseAngel {
     public Dracula(int currRow, int currCol) {
         super(currRow, currCol);
+        this.setHelperStatus(false);
+        this.setAngelName("Dracula");
     }
 
     @Override
@@ -41,13 +43,5 @@ public final class Dracula extends BaseAngel {
             wizard.setBaseModifier(wizard.getBaseModifier() - Constants.DRACULA_WIZARD_MODIFIER);
             wizard.takeDamage(Constants.DRACULA_WIZARD_HP);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Dracula{" +
-                "currRow=" + currRow +
-                ", currCol=" + currCol +
-                '}';
     }
 }

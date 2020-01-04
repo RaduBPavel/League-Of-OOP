@@ -11,6 +11,7 @@ public final class Knight extends BasePlayer {
         this.setMaxHP(Constants.KNIGHT_STARTING_HP);
         this.setCurrHP(Constants.KNIGHT_STARTING_HP);
         this.setPlayerType("K");
+        this.setPlayerName("Knight");
         this.setDamageStrategy(new KnightDamageStrategy());
         this.setHealthStrategy(new KnightHealthStrategy());
     }

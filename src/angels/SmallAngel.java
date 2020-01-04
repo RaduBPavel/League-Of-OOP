@@ -9,6 +9,8 @@ import players.Wizard;
 public final class SmallAngel extends BaseAngel {
     public SmallAngel(int currRow, int currCol) {
         super(currRow, currCol);
+        this.setHelperStatus(true);
+        this.setAngelName("SmallAngel");
     }
 
     @Override
@@ -41,13 +43,5 @@ public final class SmallAngel extends BaseAngel {
             wizard.setBaseModifier(wizard.getBaseModifier() + Constants.SMALL_ANGEL_WIZARD_MODIFIER);
             wizard.setCurrHP(wizard.getCurrHP() + Constants.SMALL_ANGEL_WIZARD_HP);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "SmallAngel{" +
-                "currRow=" + currRow +
-                ", currCol=" + currCol +
-                '}';
     }
 }
