@@ -59,8 +59,8 @@ public final class ProjectInput {
         boolean membersInstantiated = gameMap != null && playersData != null
                 && playersMoves != null && angelsData != null;
         boolean membersNotEmpty = gameMap.size() > 0 && playersData.size() > 0
-                && playersMoves.size() > 0 && noRows > 0 && noCols > 0 &&
-                angelsData.size() != 0;
+                && playersMoves.size() > 0 && noRows > 0 && noCols > 0
+                && angelsData.size() != 0;
 
         return membersInstantiated && membersNotEmpty;
     }

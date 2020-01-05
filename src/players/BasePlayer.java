@@ -62,17 +62,17 @@ public abstract class BasePlayer {
     }
 
     // XP manipulation functions
-    public final void addXP(BasePlayer player) {
+    public final void addXP(final BasePlayer player) {
         xpPoints += Math.max(0, Constants.BASE_LEVEL_UP_XP
                 - (this.currLevel - player.getLevel()) * Constants.LEVEL_UP_XP_MILESTONE);
     }
 
-    public final int computeXP(BasePlayer player) {
+    public final int computeXP(final BasePlayer player) {
         return Math.max(0, Constants.BASE_LEVEL_UP_XP
                 - (this.currLevel - player.getLevel()) * Constants.LEVEL_UP_XP_MILESTONE);
     }
 
-    public final void addXP(int xpAmount) {
+    public final void addXP(final int xpAmount) {
         xpPoints += xpAmount;
     }
 
@@ -102,13 +102,14 @@ public abstract class BasePlayer {
     public abstract float secondAbility(String typeOfLand);
 
     // Function used for Double Dispatch in relation with the angels
-    public abstract void isVisitedBy(BaseAngel angel);
+    public abstract boolean isVisitedBy(BaseAngel angel);
 
     // Status modifier functions
     public final void takeDamage(final int damageTaken) {
         this.currHP -= damageTaken;
         if (currHP <= 0) {
             aliveStatus = false;
+            currHP = 0;
         }
     }
 
@@ -128,6 +129,12 @@ public abstract class BasePlayer {
         }
         if (currHP <= 0) {
             aliveStatus = false;
+//            if (!isStunned) {
+//                stunnedRounds--;
+//                if (stunnedRounds == 0) {
+//                    isStunned = true;
+//                }
+//            }
         }
     }
 
@@ -177,13 +184,18 @@ public abstract class BasePlayer {
         return playerType;
     }
 
-    public final String getPlayerName() { return playerName; }
+    public final String getPlayerName() {
+        return playerName;
+    }
 
-    public void setPlayerName(String playerName) {
+    /***
+     * @param playerName
+     */
+    void setPlayerName(final String playerName) {
         this.playerName = playerName;
     }
 
-    public final void setPlayerType(final String playerType) {
+    final void setPlayerType(final String playerType) {
         this.playerType = playerType;
     }
 
@@ -191,7 +203,7 @@ public abstract class BasePlayer {
         return maxHP;
     }
 
-    public final void setMaxHP(final int maxHP) {
+    final void setMaxHP(final int maxHP) {
         this.maxHP = maxHP;
     }
 
@@ -207,27 +219,45 @@ public abstract class BasePlayer {
         return xpPoints;
     }
 
+    /***
+     * @return
+     */
     public float getBaseModifier() {
         return baseModifier;
     }
 
-    public void setBaseModifier(float baseModifier) {
+    /***
+     * @param baseModifier
+     */
+    public void setBaseModifier(final float baseModifier) {
         this.baseModifier = baseModifier;
     }
 
-    public void setDamageStrategy(DamageStrategy damageStrategy) {
+    /***
+     * @param damageStrategy
+     */
+    void setDamageStrategy(final DamageStrategy damageStrategy) {
         this.damageStrategy = damageStrategy;
     }
 
-    public void setHealthStrategy(HealthStrategy healthStrategy) {
+    /***
+     * @param healthStrategy
+     */
+    void setHealthStrategy(final HealthStrategy healthStrategy) {
         this.healthStrategy = healthStrategy;
     }
 
-    public DamageStrategy getDamageStrategy() {
+    /***
+     * @return
+     */
+    DamageStrategy getDamageStrategy() {
         return damageStrategy;
     }
 
-    public HealthStrategy getHealthStrategy() {
+    /***
+     * @return
+     */
+    HealthStrategy getHealthStrategy() {
         return healthStrategy;
     }
 

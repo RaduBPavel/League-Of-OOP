@@ -7,37 +7,45 @@ import players.Rogue;
 import players.Wizard;
 
 public final class DarkAngel extends BaseAngel {
-    public DarkAngel(int currRow, int currCol) {
+    public DarkAngel(final int currRow, final int currCol) {
         super(currRow, currCol);
         this.setHelperStatus(false);
         this.setAngelName("DarkAngel");
     }
 
     @Override
-    public void visits(Pyromancer pyro) {
+    public boolean visits(final Pyromancer pyro) {
         if (pyro.isAlive()) {
             pyro.takeDamage(Constants.DARK_ANGEL_PYRO_HP);
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void visits(Knight knight) {
+    public boolean visits(final Knight knight) {
         if (knight.isAlive()) {
-        knight.takeDamage(Constants.DARK_ANGEL_KNIGHT_HP);
+            knight.takeDamage(Constants.DARK_ANGEL_KNIGHT_HP);
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void visits(Rogue rogue) {
+    public boolean visits(final Rogue rogue) {
         if (rogue.isAlive()) {
-        rogue.takeDamage(Constants.DARK_ANGEL_ROGUE_HP);
+            rogue.takeDamage(Constants.DARK_ANGEL_ROGUE_HP);
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void visits(Wizard wizard) {
+    public boolean visits(final Wizard wizard) {
         if (wizard.isAlive()) {
             wizard.takeDamage(Constants.DARK_ANGEL_WIZARD_HP);
+            return true;
         }
+        return false;
     }
 }

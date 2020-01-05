@@ -3,11 +3,11 @@ package strategy;
 import common.Constants;
 import players.BasePlayer;
 
-public class RogueHealthStrategy implements HealthStrategy {
+public final class RogueHealthStrategy implements HealthStrategy {
     @Override
-    public void applyHealthStrategy(BasePlayer player) {
+    public void applyHealthStrategy(final BasePlayer player) {
         player.setBaseModifier(player.getBaseModifier() - Constants.ROGUE_DAMAGE_DECREASE);
-        player.setCurrHP(player.getCurrHP() + Math.round(player.getCurrHP() *
-                Constants.ROGUE_HEALTH_INCREASE));
+        player.setCurrHP(player.getCurrHP() + (int) (player.getCurrHP()
+                * Constants.ROGUE_HEALTH_INCREASE));
     }
 }

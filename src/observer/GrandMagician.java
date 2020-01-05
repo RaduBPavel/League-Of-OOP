@@ -6,11 +6,11 @@ import players.BasePlayer;
 import fileio.implementations.FileWriter;
 import java.util.List;
 
-public class GrandMagician {
+public final class GrandMagician {
     private static GrandMagician instance = null;
     private FileWriter fileWriter;
 
-    private GrandMagician() {}
+    private GrandMagician() { }
     public static GrandMagician getInstance() {
         if (instance == null) {
             instance = new GrandMagician();
@@ -100,10 +100,10 @@ public class GrandMagician {
             fileWriter.writeWord("~~ Results ~~\n");
             for (BasePlayer player : players) {
                 if (!player.isAlive()) {
-                    fileWriter.writeWord(player.getPlayerType() + " dead");
+                    fileWriter.writeWord(player.getPlayerType() + " dead ");
                     fileWriter.writeNewLine();
                 } else {
-                    fileWriter.writeWord((player.toString()));
+                    fileWriter.writeWord((player.toString()) + " ");
                     fileWriter.writeNewLine();
                 }
             }

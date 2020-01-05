@@ -41,8 +41,8 @@ public final class Wizard extends BasePlayer {
     @Override
     public void isAttackedBy(final Pyromancer pyromancer, final String typeOfLand) {
         // Base damages
-        float baseFirst = pyromancer.firstAbility(typeOfLand);
-        float baseSecond = pyromancer.secondAbility(typeOfLand);
+        int baseFirst = Math.round(pyromancer.firstAbility(typeOfLand));
+        int baseSecond = Math.round(pyromancer.secondAbility(typeOfLand));
         float baseDoT = Constants.IGNITE_BASE_OVERTIME_DAMAGE
                 + pyromancer.getLevel() * Constants.IGNITE_LEVEL_OVERTIME_DAMAGE;
 
@@ -51,14 +51,18 @@ public final class Wizard extends BasePlayer {
             baseDoT += baseDoT * Constants.PYRO_VOLCANIC_MODIFIER;
         }
 
-        float modifierFirst = pyromancer.getBaseModifier() + Constants.PYRO_VS_WIZARD_FIREBLAST_MODIFIER;
-        float modifierSecond = pyromancer.getBaseModifier() + Constants.PYRO_VS_WIZARD_IGNITE_MODIFIER;
-        float modifierDoT = pyromancer.getBaseModifier() + Constants.PYRO_VS_WIZARD_IGNITE_MODIFIER;
+        float modifierFirst = pyromancer.getBaseModifier()
+                + Constants.PYRO_VS_WIZARD_FIREBLAST_MODIFIER;
+        float modifierSecond = pyromancer.getBaseModifier()
+                + Constants.PYRO_VS_WIZARD_IGNITE_MODIFIER;
+        float modifierDoT = pyromancer.getBaseModifier()
+                + Constants.PYRO_VS_WIZARD_IGNITE_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst * modifierFirst)
-                + Math.round(baseSecond * modifierSecond));
-        this.applyDoT(Math.round(baseDoT * modifierDoT), Constants.IGNITE_OVERTIME_ROUNDS);
+        this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
+                + Math.round(Math.round(baseSecond) * modifierSecond));
+        this.applyDoT(Math.round(Math.round(baseDoT) * modifierDoT),
+                Constants.IGNITE_OVERTIME_ROUNDS);
     }
 
     @Override
@@ -75,12 +79,14 @@ public final class Wizard extends BasePlayer {
         float baseSecond = knight.secondAbility(typeOfLand);
 
         // Modifiers
-        float modifierFirst = knight.getBaseModifier() + Constants.KNIGHT_VS_WIZARD_EXECUTE_MODIFIER;
-        float modifierSecond = knight.getBaseModifier() + Constants.KNIGHT_VS_WIZARD_SLAM_MODIFIER;
+        float modifierFirst = knight.getBaseModifier()
+                + Constants.KNIGHT_VS_WIZARD_EXECUTE_MODIFIER;
+        float modifierSecond = knight.getBaseModifier()
+                + Constants.KNIGHT_VS_WIZARD_SLAM_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst * modifierFirst)
-                + Math.round(baseSecond * modifierSecond));
+        this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
+                + Math.round(Math.round(baseSecond) * modifierSecond));
         this.applyStun(Constants.SLAM_OVERTIME_ROUNDS);
     }
 
@@ -96,13 +102,15 @@ public final class Wizard extends BasePlayer {
             overtimeRounds = Constants.PARALYSIS_EXTENDED_OVERTIME;
         }
 
-        float modifierFirst = rogue.getBaseModifier() + Constants.ROGUE_VS_WIZARD_BACKSTAB_MODIFIER;
-        float modifierSecond = rogue.getBaseModifier() + Constants.ROGUE_VS_WIZARD_PARALYSIS_MODIFIER;
+        float modifierFirst = rogue.getBaseModifier()
+                + Constants.ROGUE_VS_WIZARD_BACKSTAB_MODIFIER;
+        float modifierSecond = rogue.getBaseModifier()
+                + Constants.ROGUE_VS_WIZARD_PARALYSIS_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst * modifierFirst)
-                + Math.round(baseSecond * modifierSecond));
-        this.applyDoT(Math.round(baseSecond * modifierSecond), overtimeRounds);
+        this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
+                + Math.round(Math.round(baseSecond) * modifierSecond));
+        this.applyDoT(Math.round(Math.round(baseSecond) * modifierSecond), overtimeRounds);
         this.applyStun(overtimeRounds);
     }
 
@@ -145,16 +153,16 @@ public final class Wizard extends BasePlayer {
     }
 
     @Override
-    public void isVisitedBy(final BaseAngel angel) {
-        angel.visits(this);
+    public boolean isVisitedBy(final BaseAngel angel) {
+        return angel.visits(this);
     }
 
     @Override
     public void applyStrategy() {
-        if (Constants.WIZARD_MIN_PERCENT * this.getMaxHP() < this.getCurrHP()
-                && Constants.WIZARD_MAX_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+        if (Math.round(Constants.WIZARD_MIN_PERCENT * this.getMaxHP()) < this.getCurrHP()
+                && Math.round(Constants.WIZARD_MAX_PERCENT * this.getMaxHP()) > this.getCurrHP()) {
             this.getDamageStrategy().applyDamageStrategy(this);
-        } else if (Constants.WIZARD_MIN_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+        } else if (Math.round(Constants.WIZARD_MIN_PERCENT * this.getMaxHP()) > this.getCurrHP()) {
             this.getHealthStrategy().applyHealthStrategy(this);
         }
     }

@@ -6,37 +6,45 @@ import players.Rogue;
 import players.Wizard;
 
 public final class TheDoomer extends BaseAngel {
-    public TheDoomer(int currRow, int currCol) {
+    public TheDoomer(final int currRow, final int currCol) {
         super(currRow, currCol);
         this.setHelperStatus(false);
         this.setAngelName("TheDoomer");
     }
 
     @Override
-    public void visits(Pyromancer pyro) {
+    public boolean visits(final Pyromancer pyro) {
         if (pyro.isAlive()) {
             pyro.takeDamage(pyro.getCurrHP());
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void visits(Knight knight) {
+    public boolean visits(final Knight knight) {
         if (knight.isAlive()) {
             knight.takeDamage(knight.getCurrHP());
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void visits(Rogue rogue) {
+    public boolean visits(final Rogue rogue) {
         if (rogue.isAlive()) {
             rogue.takeDamage(rogue.getCurrHP());
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void visits(Wizard wizard) {
+    public boolean visits(final Wizard wizard) {
         if (wizard.isAlive()) {
             wizard.takeDamage(wizard.getCurrHP());
+            return true;
         }
+        return false;
     }
 }

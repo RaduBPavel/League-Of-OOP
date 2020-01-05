@@ -54,14 +54,18 @@ public final class Rogue extends BasePlayer {
             baseDoT += baseDoT * Constants.PYRO_VOLCANIC_MODIFIER;
         }
 
-        float modifierFirst = pyromancer.getBaseModifier() + Constants.PYRO_VS_ROGUE_FIREBLAST_MODIFIER;
-        float modifierSecond = pyromancer.getBaseModifier() + Constants.PYRO_VS_ROGUE_IGNITE_MODIFIER;
-        float modifierDoT = pyromancer.getBaseModifier() + Constants.PYRO_VS_ROGUE_IGNITE_MODIFIER;
+        float modifierFirst = pyromancer.getBaseModifier()
+                + Constants.PYRO_VS_ROGUE_FIREBLAST_MODIFIER;
+        float modifierSecond = pyromancer.getBaseModifier()
+                + Constants.PYRO_VS_ROGUE_IGNITE_MODIFIER;
+        float modifierDoT = pyromancer.getBaseModifier()
+                + Constants.PYRO_VS_ROGUE_IGNITE_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst * modifierFirst)
-                + Math.round(baseSecond * modifierSecond));
-        this.applyDoT(Math.round(baseDoT * modifierDoT), Constants.IGNITE_OVERTIME_ROUNDS);
+        this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
+                + Math.round(Math.round(baseSecond) * modifierSecond));
+        this.applyDoT(Math.round(Math.round(baseDoT) * modifierDoT),
+                Constants.IGNITE_OVERTIME_ROUNDS);
     }
 
     @Override
@@ -82,8 +86,8 @@ public final class Rogue extends BasePlayer {
         float modifierSecond = knight.getBaseModifier() + Constants.KNIGHT_VS_ROGUE_SLAM_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst * modifierFirst)
-                + Math.round(baseSecond * modifierSecond));
+        this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
+                + Math.round(Math.round(baseSecond) * modifierSecond));
         this.applyStun(Constants.SLAM_OVERTIME_ROUNDS);
     }
 
@@ -99,13 +103,15 @@ public final class Rogue extends BasePlayer {
             overtimeRounds = Constants.PARALYSIS_EXTENDED_OVERTIME;
         }
 
-        float modifierFirst = rogue.getBaseModifier() + Constants.ROGUE_VS_ROGUE_BACKSTAB_MODIFIER;
-        float modifierSecond = rogue.getBaseModifier() + Constants.ROGUE_VS_ROGUE_PARALYSIS_MODIFIER;
+        float modifierFirst = rogue.getBaseModifier()
+                + Constants.ROGUE_VS_ROGUE_BACKSTAB_MODIFIER;
+        float modifierSecond = rogue.getBaseModifier()
+                + Constants.ROGUE_VS_ROGUE_PARALYSIS_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst * modifierFirst)
-                + Math.round(baseSecond * modifierSecond));
-        this.applyDoT(Math.round(baseSecond * modifierSecond), overtimeRounds);
+        this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
+                + Math.round(Math.round(baseSecond) * modifierSecond));
+        this.applyDoT(Math.round(Math.round(baseSecond) * modifierSecond), overtimeRounds);
         this.applyStun(overtimeRounds);
     }
 
@@ -116,8 +122,10 @@ public final class Rogue extends BasePlayer {
         float baseSecond = wizard.secondAbility(typeOfLand);
 
         // Modifiers
-        float modifierFirst = wizard.getBaseModifier() + Constants.WIZARD_VS_ROGUE_DRAIN_MODIFIER;
-        float modifierSecond = wizard.getBaseModifier() + Constants.WIZARD_VS_ROGUE_DEFLECT_MODIFIER;
+        float modifierFirst = wizard.getBaseModifier()
+                + Constants.WIZARD_VS_ROGUE_DRAIN_MODIFIER;
+        float modifierSecond = wizard.getBaseModifier()
+                + Constants.WIZARD_VS_ROGUE_DEFLECT_MODIFIER;
 
         baseFirst *= modifierFirst;
         baseSecond *= modifierSecond;
@@ -166,16 +174,16 @@ public final class Rogue extends BasePlayer {
     }
 
     @Override
-    public void isVisitedBy(final BaseAngel angel) {
-        angel.visits(this);
+    public boolean isVisitedBy(final BaseAngel angel) {
+        return angel.visits(this);
     }
 
     @Override
     public void applyStrategy() {
-        if (Constants.ROGUE_MIN_PERCENT * this.getMaxHP() < this.getCurrHP()
-                && Constants.ROGUE_MAX_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+        if (Math.round(Constants.ROGUE_MIN_PERCENT * this.getMaxHP()) < this.getCurrHP()
+                && Math.round(Constants.ROGUE_MAX_PERCENT * this.getMaxHP()) > this.getCurrHP()) {
             this.getDamageStrategy().applyDamageStrategy(this);
-        } else if (Constants.ROGUE_MIN_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+        } else if (Math.round(Constants.ROGUE_MIN_PERCENT * this.getMaxHP()) > this.getCurrHP()) {
             this.getHealthStrategy().applyHealthStrategy(this);
         }
     }

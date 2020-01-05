@@ -22,32 +22,51 @@ public abstract class BaseAngel {
     }
 
     // Functions used for Double Dispatch
-    public abstract void visits(Pyromancer pyro);
-    public abstract void visits(Knight knight);
-    public abstract void visits(Rogue rogue);
-    public abstract void visits(Wizard wizard);
+    public abstract boolean visits(Pyromancer pyro);
+    public abstract boolean visits(Knight knight);
+    public abstract boolean visits(Rogue rogue);
+    public abstract boolean visits(Wizard wizard);
 
+    /***
+     * @return
+     */
     public int getCurrRow() {
         return currRow;
     }
 
+    /***
+     * @return
+     */
     public int getCurrCol() {
         return currCol;
     }
 
+    /***
+     *
+     * @return
+     */
     public boolean isHelper() {
         return helperStatus;
     }
 
-    public void setHelperStatus(boolean helperStatus) {
+    /***
+     * @param helperStatus
+     */
+    public void setHelperStatus(final boolean helperStatus) {
         this.helperStatus = helperStatus;
     }
 
+    /***
+     * @return
+     */
     public String getAngelName() {
         return angelName;
     }
 
-    public void setAngelName(String angelName) {
+    /***
+     * @param angelName
+     */
+    public void setAngelName(final String angelName) {
         this.angelName = angelName;
     }
 }

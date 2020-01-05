@@ -52,14 +52,18 @@ public final class Pyromancer extends BasePlayer {
             baseDoT += baseDoT * Constants.PYRO_VOLCANIC_MODIFIER;
         }
 
-        float modifierFirst = pyromancer.getBaseModifier() + Constants.PYRO_VS_PYRO_FIREBLAST_MODIFIER;
-        float modifierSecond = pyromancer.getBaseModifier() + Constants.PYRO_VS_PYRO_IGNITE_MODIFIER;
-        float modifierDoT = pyromancer.getBaseModifier() + Constants.PYRO_VS_PYRO_IGNITE_MODIFIER;
+        float modifierFirst = pyromancer.getBaseModifier()
+                + Constants.PYRO_VS_PYRO_FIREBLAST_MODIFIER;
+        float modifierSecond = pyromancer.getBaseModifier()
+                + Constants.PYRO_VS_PYRO_IGNITE_MODIFIER;
+        float modifierDoT = pyromancer.getBaseModifier()
+                + Constants.PYRO_VS_PYRO_IGNITE_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst * modifierFirst)
-                + Math.round(baseSecond * modifierSecond));
-        this.applyDoT(Math.round(baseDoT * modifierDoT), Constants.IGNITE_OVERTIME_ROUNDS);
+        this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
+                + Math.round(Math.round(baseSecond) * modifierSecond));
+        this.applyDoT(Math.round(Math.round(baseDoT) * modifierDoT),
+                Constants.IGNITE_OVERTIME_ROUNDS);
     }
 
     @Override
@@ -80,8 +84,8 @@ public final class Pyromancer extends BasePlayer {
         float modifierSecond = knight.getBaseModifier() + Constants.KNIGHT_VS_PYRO_SLAM_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst * modifierFirst)
-                + Math.round(baseSecond * modifierSecond));
+        this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
+                + Math.round(Math.round(baseSecond) * modifierSecond));
         this.applyStun(Constants.SLAM_OVERTIME_ROUNDS);
     }
 
@@ -101,9 +105,9 @@ public final class Pyromancer extends BasePlayer {
         float modifierSecond = rogue.getBaseModifier() + Constants.ROGUE_VS_PYRO_PARALYSIS_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst * modifierFirst)
-            + Math.round(baseSecond * modifierSecond));
-        this.applyDoT(Math.round(baseSecond * modifierSecond), overtimeRounds);
+        this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
+            + Math.round(Math.round(baseSecond) * modifierSecond));
+        this.applyDoT(Math.round(Math.round(baseSecond) * modifierSecond), overtimeRounds);
         this.applyStun(overtimeRounds);
     }
 
@@ -125,7 +129,7 @@ public final class Pyromancer extends BasePlayer {
         int baseDeflect = Math.round(this.firstAbility(typeOfLand))
                 + Math.round(this.secondAbility(typeOfLand));
         // Apply damage
-        this.takeDamage(Math.round(baseFirst * baseDrain)
+        this.takeDamage(Math.round(baseFirst * Math.round(baseDrain))
                 + Math.round(baseSecond * baseDeflect));
     }
 
@@ -155,16 +159,16 @@ public final class Pyromancer extends BasePlayer {
     }
 
     @Override
-    public void isVisitedBy(final BaseAngel angel) {
-        angel.visits(this);
+    public boolean isVisitedBy(final BaseAngel angel) {
+        return angel.visits(this);
     }
 
     @Override
     public void applyStrategy() {
-        if (Constants.PYRO_MIN_PERCENT * this.getMaxHP() < this.getCurrHP()
-                && Constants.PYRO_MAX_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+        if (Math.round(Constants.PYRO_MIN_PERCENT * this.getMaxHP()) < this.getCurrHP()
+                && Math.round(Constants.PYRO_MAX_PERCENT * this.getMaxHP()) > this.getCurrHP()) {
             this.getDamageStrategy().applyDamageStrategy(this);
-        } else if (Constants.PYRO_MIN_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+        } else if (Math.round(Constants.PYRO_MIN_PERCENT * this.getMaxHP()) > this.getCurrHP()) {
             this.getHealthStrategy().applyHealthStrategy(this);
         }
     }

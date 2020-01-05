@@ -1,7 +1,5 @@
 package angels;
 
-import java.util.List;
-
 public final class AngelFactory {
     public enum AngelType {
         DamageAngel, DarkAngel, Dracula, GoodBoy, LevelUpAngel, LifeGiver,
@@ -35,8 +33,8 @@ public final class AngelFactory {
                 return new TheDoomer(currRow, currCol);
             case "XPAngel":
                 return new XPAngel(currRow, currCol);
+            default:
+                return null;
         }
-
-        return null;
     }
 }

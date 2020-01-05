@@ -1,6 +1,5 @@
 package strategy;
 
-import common.Constants;
 import players.BasePlayer;
 
 public interface DamageStrategy {

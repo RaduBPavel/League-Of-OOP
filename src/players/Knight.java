@@ -59,9 +59,9 @@ public final class Knight extends BasePlayer {
                 + Constants.PYRO_VS_KNIGHT_IGNITE_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst * modifierFirst)
-                + Math.round(baseSecond * modifierSecond));
-        this.applyDoT(Math.round(baseDoT * modifierDoT),
+        this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
+                + Math.round(Math.round(baseSecond) * modifierSecond));
+        this.applyDoT(Math.round(Math.round(baseDoT) * modifierDoT),
                 Constants.IGNITE_OVERTIME_ROUNDS);
     }
 
@@ -79,14 +79,13 @@ public final class Knight extends BasePlayer {
         float baseSecond = knight.secondAbility(typeOfLand);
 
         // Modifiers
-        float modifierFirst = knight.getBaseModifier()
-                + Constants.KNIGHT_VS_KNIGHT_EXECUTE_MODIFIER;
+        float modifierFirst = Constants.KNIGHT_VS_KNIGHT_EXECUTE_MODIFIER;
         float modifierSecond = knight.getBaseModifier()
                 +  Constants.KNIGHT_VS_KNIGHT_SLAM_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst * modifierFirst)
-                + Math.round(baseSecond * modifierSecond));
+        this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
+                + Math.round(Math.round(baseSecond) * modifierSecond));
         this.applyStun(Constants.SLAM_OVERTIME_ROUNDS);
     }
 
@@ -108,9 +107,9 @@ public final class Knight extends BasePlayer {
                 + Constants.ROGUE_VS_KNIGHT_PARALYSIS_MODIFIER;
 
         // Apply damage
-        this.takeDamage(Math.round(baseFirst * modifierFirst)
-                + Math.round(baseSecond * modifierSecond));
-        this.applyDoT(Math.round(baseSecond * modifierSecond), overtimeRounds);
+        this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
+                + Math.round(Math.round(baseSecond) * modifierSecond));
+        this.applyDoT(Math.round(Math.round(baseSecond) * modifierSecond), overtimeRounds);
         this.applyStun(overtimeRounds);
     }
 
@@ -164,16 +163,16 @@ public final class Knight extends BasePlayer {
     }
 
     @Override
-    public void isVisitedBy(final BaseAngel angel) {
-        angel.visits(this);
+    public boolean isVisitedBy(final BaseAngel angel) {
+        return angel.visits(this);
     }
 
     @Override
     public void applyStrategy() {
-        if (Constants.KNIGHT_MIN_PERCENT * this.getMaxHP() < this.getCurrHP()
-                && Constants.KNIGHT_MAX_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+        if (Math.round(Constants.KNIGHT_MIN_PERCENT * this.getMaxHP()) < this.getCurrHP()
+                && Math.round(Constants.KNIGHT_MAX_PERCENT * this.getMaxHP()) > this.getCurrHP()) {
             this.getDamageStrategy().applyDamageStrategy(this);
-        } else if (Constants.KNIGHT_MIN_PERCENT * this.getMaxHP() > this.getCurrHP()) {
+        } else if (Math.round(Constants.KNIGHT_MIN_PERCENT * this.getMaxHP()) > this.getCurrHP()) {
             this.getHealthStrategy().applyHealthStrategy(this);
         }
     }

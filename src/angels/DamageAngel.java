@@ -7,37 +7,49 @@ import players.Rogue;
 import players.Wizard;
 
 public final class DamageAngel extends BaseAngel {
-    public DamageAngel(int currRow, int currCol) {
+    public DamageAngel(final int currRow, final int currCol) {
         super(currRow, currCol);
         this.setHelperStatus(true);
         this.setAngelName("DamageAngel");
     }
 
     @Override
-    public void visits(Pyromancer pyro) {
+    public boolean visits(final Pyromancer pyro) {
         if (pyro.isAlive()) {
-            pyro.setBaseModifier(pyro.getBaseModifier() + Constants.DAMAGE_ANGEL_PYRO_MODIFIER);
+            pyro.setBaseModifier(pyro.getBaseModifier()
+                    + Constants.DAMAGE_ANGEL_PYRO_MODIFIER);
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void visits(Knight knight) {
+    public boolean visits(final Knight knight) {
         if (knight.isAlive()) {
-            knight.setBaseModifier(knight.getBaseModifier() + Constants.DAMAGE_ANGEL_KNIGHT_MODIFIER);
+            knight.setBaseModifier(knight.getBaseModifier()
+                    + Constants.DAMAGE_ANGEL_KNIGHT_MODIFIER);
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void visits(Rogue rogue) {
+    public boolean visits(final Rogue rogue) {
         if (rogue.isAlive()) {
-            rogue.setBaseModifier(rogue.getBaseModifier() + Constants.DAMAGE_ANGEL_ROGUE_MODIFIER);
+            rogue.setBaseModifier(rogue.getBaseModifier()
+                    + Constants.DAMAGE_ANGEL_ROGUE_MODIFIER);
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void visits(Wizard wizard) {
+    public boolean visits(final Wizard wizard) {
         if (wizard.isAlive()) {
-            wizard.setBaseModifier(wizard.getBaseModifier() + Constants.DAMAGE_ANGEL_WIZARD_MODIFIER);
+            wizard.setBaseModifier(wizard.getBaseModifier()
+                    + Constants.DAMAGE_ANGEL_WIZARD_MODIFIER);
+            return true;
         }
+        return false;
     }
 }

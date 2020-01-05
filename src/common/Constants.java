@@ -71,7 +71,7 @@ public final class Constants {
 
     // Knight
     public static final float KNIGHT_VS_ROGUE_EXECUTE_MODIFIER = 0.15f;
-    public static final float KNIGHT_VS_KNIGHT_EXECUTE_MODIFIER = 0.0f;
+    public static final float KNIGHT_VS_KNIGHT_EXECUTE_MODIFIER = 1.0f;
     public static final float KNIGHT_VS_PYRO_EXECUTE_MODIFIER = 0.1f;
     public static final float KNIGHT_VS_WIZARD_EXECUTE_MODIFIER = -0.2f;
     public static final float KNIGHT_VS_ROGUE_SLAM_MODIFIER = -0.2f;
@@ -167,36 +167,36 @@ public final class Constants {
     // Knight Strategy Modifiers
     public static final float KNIGHT_DAMAGE_INCREASE = 0.5f;
     public static final float KNIGHT_DAMAGE_DECREASE = 0.2f;
-    public static final float KNIGHT_HEALTH_INCREASE = 0.25f;
-    public static final float KNIGHT_HEALTH_DECREASE = 0.2f;
+    public static final float KNIGHT_HEALTH_INCREASE = 1f / 4f;
+    public static final float KNIGHT_HEALTH_DECREASE = 1f / 5f;
 
     // Pyromancer Strategy Modifiers
     public static final float PYRO_DAMAGE_INCREASE = 0.7f;
     public static final float PYRO_DAMAGE_DECREASE = 0.3f;
-    public static final float PYRO_HEALTH_INCREASE = 0.33f;
-    public static final float PYRO_HEALTH_DECREASE = 0.25f;
+    public static final float PYRO_HEALTH_INCREASE = 1f / 3f;
+    public static final float PYRO_HEALTH_DECREASE = 1f / 4f;
 
     // Rogue Strategy Modifiers
     public static final float ROGUE_DAMAGE_INCREASE = 0.4f;
     public static final float ROGUE_DAMAGE_DECREASE = 0.1f;
-    public static final float ROGUE_HEALTH_INCREASE = 0.5f;
-    public static final float ROGUE_HEALTH_DECREASE = 0.14f;
+    public static final float ROGUE_HEALTH_INCREASE = 1f / 2f;
+    public static final float ROGUE_HEALTH_DECREASE = 1f / 7f;
 
     // Wizard Strategy Modifiers
     public static final float WIZARD_DAMAGE_INCREASE = 0.6f;
     public static final float WIZARD_DAMAGE_DECREASE = 0.2f;
-    public static final float WIZARD_HEALTH_INCREASE = 0.2f;
-    public static final float WIZARD_HEALTH_DECREASE = 0.1f;
+    public static final float WIZARD_HEALTH_INCREASE = 1f / 5f;
+    public static final float WIZARD_HEALTH_DECREASE = 1f / 10f;
 
     // Strategy Application Health Modifiers
-    public static final float KNIGHT_MIN_PERCENT = 0.33f;
-    public static final float KNIGHT_MAX_PERCENT = 0.5f;
-    public static final float PYRO_MIN_PERCENT = 0.25f;
-    public static final float PYRO_MAX_PERCENT = 0.33f;
-    public static final float ROGUE_MIN_PERCENT = 0.14f;
-    public static final float ROGUE_MAX_PERCENT = 0.2f;
-    public static final float WIZARD_MIN_PERCENT = 0.25f;
-    public static final float WIZARD_MAX_PERCENT = 0.5f;
+    public static final float KNIGHT_MIN_PERCENT = 1f / 3f;
+    public static final float KNIGHT_MAX_PERCENT = 1f / 2f;
+    public static final float PYRO_MIN_PERCENT = 1f / 4f;
+    public static final float PYRO_MAX_PERCENT = 1f / 3f;
+    public static final float ROGUE_MIN_PERCENT = 1f / 7f;
+    public static final float ROGUE_MAX_PERCENT = 1f / 5f;
+    public static final float WIZARD_MIN_PERCENT = 1f / 4f;
+    public static final float WIZARD_MAX_PERCENT = 1f / 2f;
 
     private Constants() { }
 }
