@@ -62,14 +62,13 @@ public abstract class BasePlayer {
     }
 
     // XP manipulation functions
-    public final void addXP(final BasePlayer player) {
-        xpPoints += Math.max(0, Constants.BASE_LEVEL_UP_XP
-                - (this.currLevel - player.getLevel()) * Constants.LEVEL_UP_XP_MILESTONE);
-    }
-
     public final int computeXP(final BasePlayer player) {
         return Math.max(0, Constants.BASE_LEVEL_UP_XP
                 - (this.currLevel - player.getLevel()) * Constants.LEVEL_UP_XP_MILESTONE);
+    }
+
+    public final void addXP(final BasePlayer player) {
+        xpPoints += computeXP(player);
     }
 
     public final void addXP(final int xpAmount) {

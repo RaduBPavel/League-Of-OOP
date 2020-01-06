@@ -5,6 +5,7 @@ import players.Pyromancer;
 import players.Rogue;
 import players.Wizard;
 
+// The Doomer, kills any player it encounters
 public final class TheDoomer extends BaseAngel {
     public TheDoomer(final int currRow, final int currCol) {
         super(currRow, currCol);

@@ -6,6 +6,7 @@ import players.Pyromancer;
 import players.Rogue;
 import players.Wizard;
 
+// Spawner, revives dead players
 public final class Spawner extends BaseAngel {
     public Spawner(final int currRow, final int currCol) {
         super(currRow, currCol);

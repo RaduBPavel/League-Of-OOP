@@ -6,6 +6,7 @@ import players.Pyromancer;
 import players.Rogue;
 import players.Wizard;
 
+// Life Giver, gives player additional health
 public final class LifeGiver extends BaseAngel {
     public LifeGiver(final int currRow, final int currCol) {
         super(currRow, currCol);

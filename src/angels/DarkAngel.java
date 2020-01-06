@@ -6,6 +6,7 @@ import players.Pyromancer;
 import players.Rogue;
 import players.Wizard;
 
+// Dark Angel, damages the players
 public final class DarkAngel extends BaseAngel {
     public DarkAngel(final int currRow, final int currCol) {
         super(currRow, currCol);

@@ -6,6 +6,7 @@ import players.Pyromancer;
 import players.Rogue;
 import players.Wizard;
 
+// XP Angel, gives players bonus XP
 public final class XPAngel extends BaseAngel {
     public XPAngel(final int currRow, final int currCol) {
         super(currRow, currCol);

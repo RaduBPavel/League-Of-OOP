@@ -6,6 +6,7 @@ import players.Pyromancer;
 import players.Rogue;
 import players.Wizard;
 
+// Good Boy, increases damage and health of players
 public final class GoodBoy extends BaseAngel {
     public GoodBoy(final int currRow, final int currCol) {
         super(currRow, currCol);

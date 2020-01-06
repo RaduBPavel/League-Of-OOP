@@ -6,6 +6,7 @@ import players.Pyromancer;
 import players.Rogue;
 import players.Wizard;
 
+// Dracula, reduces damage and damages players
 public final class Dracula extends BaseAngel {
     public Dracula(final int currRow, final int currCol) {
         super(currRow, currCol);

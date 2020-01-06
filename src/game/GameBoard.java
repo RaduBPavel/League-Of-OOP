@@ -9,6 +9,7 @@ import angels.BaseAngel;
 import java.util.ArrayList;
 import java.util.List;
 
+// Game board, implemented with the help of the Singleton Pattern
 public final class GameBoard {
     private String[][] gameMap;
     private List<BasePlayer> listOfPlayers;
@@ -142,7 +143,7 @@ public final class GameBoard {
             int levelIndex = -1;
             for (BasePlayer player : listOfPlayers) {
                 levelIndex++;
-                if (player.levelStatus() && player.isAlive()) {
+                if (player.levelStatus()) {
                     player.levelUp();
                     grandMagician.updateLevel(player, levelIndex, prevLevelList.get(levelIndex));
                 }
@@ -164,11 +165,9 @@ public final class GameBoard {
 
                         if (player.isVisitedBy(angel)) {
                             // Checks if the player was killed or revived and update the magician
-                            if (playerInitialStatus
-                                    && playerInitialStatus != player.isAlive()) {
+                            if (playerInitialStatus && !player.isAlive()) {
                                 action = "killed";
-                            } else if (!playerInitialStatus
-                                    && playerInitialStatus != player.isAlive()) {
+                            } else if (!playerInitialStatus && player.isAlive()) {
                                 action = "revived";
                             }
 
@@ -200,6 +199,10 @@ public final class GameBoard {
             firstPlayer.addXP(secondPlayer);
         } else if (!firstPlayer.isAlive() && secondPlayer.isAlive()) {
             secondPlayer.addXP(firstPlayer);
+        } else if (!firstPlayer.isAlive()) {
+            int tempXP = secondPlayer.computeXP(firstPlayer);
+            firstPlayer.addXP(secondPlayer);
+            secondPlayer.addXP(tempXP);
         }
     }
 

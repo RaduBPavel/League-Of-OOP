@@ -25,6 +25,7 @@ public final class Pyromancer extends BasePlayer {
         setMaxHP(getMaxHP() + Constants.PYRO_LEVEL_HP * levelsGained);
         setCurrHP(getMaxHP());
         setLevel(getLevel() + levelsGained);
+        revive();
     }
 
     /***
@@ -105,9 +106,10 @@ public final class Pyromancer extends BasePlayer {
         float modifierSecond = rogue.getBaseModifier() + Constants.ROGUE_VS_PYRO_PARALYSIS_MODIFIER;
 
         // Apply damage
+        int rogueDoT = Math.round(Math.round(baseSecond) * modifierSecond);
         this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
-            + Math.round(Math.round(baseSecond) * modifierSecond));
-        this.applyDoT(Math.round(Math.round(baseSecond) * modifierSecond), overtimeRounds);
+                + rogueDoT);
+        this.applyDoT(rogueDoT, overtimeRounds);
         this.applyStun(overtimeRounds);
     }
 
@@ -158,11 +160,13 @@ public final class Pyromancer extends BasePlayer {
         return baseDamage;
     }
 
+    // Used for Double Dispatch in conjunction with the angels
     @Override
     public boolean isVisitedBy(final BaseAngel angel) {
         return angel.visits(this);
     }
 
+    // Dynamically choosing the strategy
     @Override
     public void applyStrategy() {
         if (Math.round(Constants.PYRO_MIN_PERCENT * this.getMaxHP()) < this.getCurrHP()

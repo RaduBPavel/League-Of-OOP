@@ -6,6 +6,7 @@ import players.BasePlayer;
 import fileio.implementations.FileWriter;
 import java.util.List;
 
+// Grand Magician, implemented with the help of the Singleton Pattern
 public final class GrandMagician {
     private static GrandMagician instance = null;
     private FileWriter fileWriter;
@@ -27,6 +28,7 @@ public final class GrandMagician {
         }
     }
 
+    // Round update message
     public void updateRound(final int roundNumber) {
         try {
             if (roundNumber != 1) {
@@ -40,6 +42,7 @@ public final class GrandMagician {
         }
     }
 
+    // Player kill update message
     public void updatePlayerKill(final BasePlayer killedPlayer, final int indexKilled,
                                  final BasePlayer killerPlayer, final int indexKiller) {
         try {
@@ -51,6 +54,7 @@ public final class GrandMagician {
         }
     }
 
+    // Player level up update message
     public void updateLevel(final BasePlayer player, final int index, final int prevLevel) {
         try {
            for (int i = prevLevel + 1; i <= player.getLevel(); ++i) {
@@ -62,6 +66,7 @@ public final class GrandMagician {
         }
     }
 
+    // Angel Spawn update message
     public void updateAngelSpawn(final BaseAngel angel) {
         try {
             fileWriter.writeWord("Angel " + angel.getAngelName() + " was spawned at "
@@ -71,6 +76,7 @@ public final class GrandMagician {
         }
     }
 
+    // Angel effect update message
     public void updateAngelAction(final BaseAngel angel, final BasePlayer player, final int index,
                                   final String action) {
         try {
@@ -94,6 +100,7 @@ public final class GrandMagician {
         }
     }
 
+    // Final results update message
     public void writeResults(final List<BasePlayer> players) {
         try {
             fileWriter.writeNewLine();
@@ -103,7 +110,7 @@ public final class GrandMagician {
                     fileWriter.writeWord(player.getPlayerType() + " dead ");
                     fileWriter.writeNewLine();
                 } else {
-                    fileWriter.writeWord((player.toString()) + " ");
+                    fileWriter.writeWord((player.toString()));
                     fileWriter.writeNewLine();
                 }
             }

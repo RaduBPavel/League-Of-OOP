@@ -6,6 +6,7 @@ import players.Pyromancer;
 import players.Rogue;
 import players.Wizard;
 
+// Level Up Angel, increases damage and levels up players
 public final class LevelUpAngel extends BaseAngel {
     public LevelUpAngel(final int currRow, final int currCol) {
         super(currRow, currCol);

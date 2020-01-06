@@ -24,6 +24,7 @@ public final class Knight extends BasePlayer {
         setMaxHP(getMaxHP() + Constants.KNIGHT_LEVEL_HP * levelsGained);
         setCurrHP(getMaxHP());
         setLevel(getLevel() + levelsGained);
+        revive();
     }
 
     /***
@@ -107,9 +108,10 @@ public final class Knight extends BasePlayer {
                 + Constants.ROGUE_VS_KNIGHT_PARALYSIS_MODIFIER;
 
         // Apply damage
+        int rogueDoT = Math.round(Math.round(baseSecond) * modifierSecond);
         this.takeDamage(Math.round(Math.round(baseFirst) * modifierFirst)
-                + Math.round(Math.round(baseSecond) * modifierSecond));
-        this.applyDoT(Math.round(Math.round(baseSecond) * modifierSecond), overtimeRounds);
+                + rogueDoT);
+        this.applyDoT(rogueDoT, overtimeRounds);
         this.applyStun(overtimeRounds);
     }
 
@@ -162,11 +164,13 @@ public final class Knight extends BasePlayer {
         return baseDamage;
     }
 
+    // Used for Double Dispatch in conjunction with the angels
     @Override
     public boolean isVisitedBy(final BaseAngel angel) {
         return angel.visits(this);
     }
 
+    // Dynamically choosing the strategy
     @Override
     public void applyStrategy() {
         if (Math.round(Constants.KNIGHT_MIN_PERCENT * this.getMaxHP()) < this.getCurrHP()

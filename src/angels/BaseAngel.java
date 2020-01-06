@@ -27,6 +27,7 @@ public abstract class BaseAngel {
     public abstract boolean visits(Rogue rogue);
     public abstract boolean visits(Wizard wizard);
 
+    // Auxiliary functions
     /***
      * @return
      */

@@ -6,6 +6,7 @@ import players.Pyromancer;
 import players.Rogue;
 import players.Wizard;
 
+// Damage Angel, raises the player damage
 public final class DamageAngel extends BaseAngel {
     public DamageAngel(final int currRow, final int currCol) {
         super(currRow, currCol);

@@ -6,6 +6,7 @@ import players.Pyromancer;
 import players.Rogue;
 import players.Wizard;
 
+// Small Angel, heals players and increases their damage
 public final class SmallAngel extends BaseAngel {
     public SmallAngel(final int currRow, final int currCol) {
         super(currRow, currCol);
